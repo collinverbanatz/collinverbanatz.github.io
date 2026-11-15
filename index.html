@@ -62,6 +62,18 @@ h2{font-size:clamp(1.6rem,3.5vw,2.3rem);letter-spacing:-.02em;margin:0 0 .5rem;l
 .about ul{margin:0;padding:0;list-style:none}
 .about li{padding:.5rem 0;border-bottom:1px solid var(--line)}
 footer{padding:2rem 0 3rem;color:var(--muted);border-top:1px solid var(--line);font-size:.95rem}
+.vid.has{border:1px solid var(--line);background:#000;padding:0;overflow:hidden;display:block}
+.vid video{display:block;width:100%;height:100%;object-fit:contain;background:#000}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
+.gallery figure{margin:0}
+.gallery .media{aspect-ratio:16/9;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#000}
+.gallery .media video,.gallery .media img{display:block;width:100%;height:100%;object-fit:contain}
+.gallery figcaption{margin-top:.6rem;color:var(--muted);font-size:.95rem}
+.gallery figcaption strong{color:var(--ink);display:block}
+.tool-reel{margin-top:2.5rem;max-width:760px}
+.tool-reel .media{aspect-ratio:16/9;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#000}
+.tool-reel video{display:block;width:100%;height:100%;object-fit:contain}
+.tool-reel p{margin:.6rem 0 0;color:var(--muted);font-size:.95rem}
 @media (max-width:760px){
   .hero,.proj,.about{grid-template-columns:1fr}
   .proj:nth-child(even) .vid{order:0}
@@ -73,7 +85,8 @@ footer{padding:2rem 0 3rem;color:var(--muted);border-top:1px solid var(--line);f
 <div class="wrap">
   <header class="top">
     <strong>Collin Verbanatz</strong>
-    <nav aria-label="Main"><a href="#work">Work</a><a href="#tools">Tools</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
+    <nav aria-label="Main"><a href="#work">Work</a><a href="#tools">Tools</a><a href="#gallery">Gallery</a><a
+        href="#about">About</a><a href="#contact">Contact</a></nav>
   </header>
 
   <main>
@@ -104,10 +117,13 @@ footer{padding:2rem 0 3rem;color:var(--muted);border-top:1px solid var(--line);f
 
   <section id="work">
     <h2>Selected rigs</h2>
-    <p class="sub">Current production work on BYU films and games. Clips and breakdowns for each rig are coming soon.</p>
+    <p class="sub">Current production work on BYU films and games. Rig demos are below, with more clips in the gallery.</p>
 
     <article class="proj">
-      <div class="vid"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M10 8.5l6 3.5-6 3.5z"/></svg>Rig clip coming soon</div></div>
+      <div class="vid has"><video controls playsinline preload="metadata" poster="media/vehicle-rig.jpg"
+          aria-label="Vehicle rig demo for Sandwich Kwon Do">
+          <source src="media/vehicle-rig.mp4" type="video/mp4">
+        </video></div>
       <div>
         <h3>Sandwich Kwon Do (BYU short film)</h3>
         <p>Production-ready character rigs and nine prop rigs, plus a custom vehicle rig built with mGear that has working steering, suspension, automatic wheel rotation, and tire deformation.</p>
@@ -116,7 +132,10 @@ footer{padding:2rem 0 3rem;color:var(--muted);border-top:1px solid var(--line);f
     </article>
 
     <article class="proj">
-      <div class="vid"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M10 8.5l6 3.5-6 3.5z"/></svg>Rig clip coming soon</div></div>
+      <div class="vid has"><video controls playsinline preload="metadata" poster="media/mimic.jpg"
+          aria-label="Mimic creature rig test" loop>
+          <source src="media/mimic.mp4" type="video/mp4">
+        </video></div>
       <div>
         <h3>Lantern of Souls (BYU video game)</h3>
         <p>Game-ready rigging solutions focused on animator usability and performance, including skinning, deformation, and character setup workflows, built alongside artists and programmers.</p>
@@ -142,6 +161,67 @@ footer{padding:2rem 0 3rem;color:var(--muted);border-top:1px solid var(--line);f
       <div><h3>mGear vehicle rig</h3><p>A reusable vehicle setup with steering, suspension, automatic wheel rotation, and tire deformation.</p></div>
       <div><h3>Pipeline support</h3><p>Working with animators, artists, and technical leads to solve production problems as they come up.</p></div>
     </div>
+    <div class="tool-reel">
+      <div class="media"><video controls playsinline preload="metadata" poster="media/special-problems.jpg"
+          aria-label="Rigging tools demo from the Special Problems final project">
+          <source src="media/special-problems.mp4" type="video/mp4">
+        </video></div>
+      <p>Special Problems final project: stretchy IK and rig tooling in Maya.</p>
+    </div>
+    </section>
+    
+    <section id="gallery">
+      <h2>Gallery</h2>
+      <p class="sub">More rigs, sculpts and shots from classes and productions.</p>
+      <div class="gallery">
+        <figure>
+          <div class="media"><video controls playsinline preload="metadata" poster="media/character-rig.jpg"
+              aria-label="Character rig">
+              <source src="media/character-rig.mp4" type="video/mp4">
+            </video></div>
+          <figcaption><strong>Character rig</strong>Full control rig on a bearded character, shown in Maya.</figcaption>
+        </figure>
+        <figure>
+          <div class="media"><video controls playsinline preload="metadata" poster="media/face-rig.jpg" loop
+              aria-label="Facial rig">
+              <source src="media/face-rig.mp4" type="video/mp4">
+            </video></div>
+          <figcaption><strong>Facial rig</strong>Expression range test on a stylized character face.</figcaption>
+        </figure>
+        <figure>
+          <div class="media"><video controls playsinline preload="metadata" poster="media/cody-anim.jpg" loop
+              aria-label="Rig in animation">
+              <source src="media/cody-anim.mp4" type="video/mp4">
+            </video></div>
+          <figcaption><strong>Rig in animation</strong>Animation test with a finished rig.</figcaption>
+        </figure>
+        <figure>
+          <div class="media"><video controls playsinline preload="metadata" poster="media/hair-groom.jpg" loop
+              aria-label="Hair groom">
+              <source src="media/hair-groom.mp4" type="video/mp4">
+            </video></div>
+          <figcaption><strong>Hair groom</strong>Sculpted hair and ponytail turnaround.</figcaption>
+        </figure>
+        <figure>
+          <div class="media"><video controls playsinline preload="metadata" poster="media/env-shot.jpg"
+              aria-label="Environment shot">
+              <source src="media/env-shot.mp4" type="video/mp4">
+            </video></div>
+          <figcaption><strong>Environment shot</strong>Lit environment shot.</figcaption>
+        </figure>
+        <figure>
+          <div class="media"><img src="media/props-still.jpg" alt="Props still" loading="lazy"></div>
+          <figcaption><strong>Props still</strong>Western props scene: hat, revolver, knife and wanted poster.</figcaption>
+        </figure>
+        <figure>
+          <div class="media"><img src="media/sculpt-face.jpg" alt="Face sculpt" loading="lazy"></div>
+          <figcaption><strong>Face sculpt</strong>Head and hair sculpt turnaround.</figcaption>
+        </figure>
+        <figure>
+          <div class="media"><img src="media/sculpt-hands.jpg" alt="Hand sculpt" loading="lazy"></div>
+          <figcaption><strong>Hand sculpt</strong>Hand sculpt from several angles.</figcaption>
+        </figure>
+      </div>
   </section>
 
   <section id="about">
