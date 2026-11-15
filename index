@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Collin Verbanatz – Character TD (Rigging)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#eceff3; --panel:#dde2e9; --ink:#1b212b; --muted:#566070; --line:#c3cad5;
+  --ctl-blue:#2563eb; --ctl-yellow:#e0a200; --ctl-red:#d6393a; --skin:#b4bdcb;
+  --vp-a:#d5dbe4; --vp-b:#aeb8c7; --grid:rgba(27,33,43,.12);
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#14181f; --panel:#1d232d; --ink:#e8ecf2; --muted:#9aa5b6; --line:#2e3744;
+    --ctl-blue:#5b8cff; --ctl-yellow:#ffc933; --ctl-red:#ff6b6b; --skin:#3a4556;
+    --vp-a:#3b4452; --vp-b:#242b36; --grid:rgba(255,255,255,.07); color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#14181f; --panel:#1d232d; --ink:#e8ecf2; --muted:#9aa5b6; --line:#2e3744;
+  --ctl-blue:#5b8cff; --ctl-yellow:#ffc933; --ctl-red:#ff6b6b; --skin:#3a4556;
+  --vp-a:#3b4452; --vp-b:#242b36; --grid:rgba(255,255,255,.07); color-scheme:dark;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:1.0625rem;line-height:1.6}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--ctl-blue);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 1.25rem}
+header.top{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1.25rem 0;flex-wrap:wrap}
+header.top strong{font-weight:800;font-size:1.15rem;letter-spacing:-.01em}
+nav a{margin-left:1.25rem;text-decoration:none;color:var(--muted);font-weight:600}
+nav a:hover{color:var(--ink)}
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:2.5rem;align-items:center;padding:2rem 0 4rem}
+h1{font-size:clamp(2.4rem,6vw,4.2rem);line-height:1.02;letter-spacing:-.03em;font-weight:800;margin:0 0 1.25rem}
+.lead{color:var(--muted);max-width:34rem;margin:0 0 1.5rem}
+.btn{display:inline-block;padding:.7rem 1.25rem;border-radius:8px;font-weight:600;text-decoration:none;background:var(--ink);color:var(--bg)}
+.btn.alt{background:transparent;color:var(--ink);border:2px solid var(--line);margin-left:.5rem}
+.viewport{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:linear-gradient(var(--vp-a),var(--vp-b));touch-action:none}
+.viewport svg{display:block;width:100%;height:auto}
+.hint{position:absolute;left:.9rem;bottom:.7rem;font-size:.9rem;color:var(--muted);margin:0;pointer-events:none}
+section{padding:3.5rem 0;border-top:1px solid var(--line)}
+h2{font-size:clamp(1.6rem,3.5vw,2.3rem);letter-spacing:-.02em;margin:0 0 .5rem;line-height:1.15}
+.sub{color:var(--muted);margin:0 0 2.5rem;max-width:38rem}
+.proj{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:2rem;margin-bottom:3rem;align-items:center}
+.proj:nth-child(even) .vid{order:2}
+.vid{aspect-ratio:16/9;border-radius:12px;background:var(--panel);border:1px dashed var(--line);display:grid;place-items:center;color:var(--muted);font-size:.95rem;text-align:center;padding:1rem}
+.vid svg{width:44px;height:44px;margin:0 auto .4rem;display:block}
+.proj h3{font-size:1.4rem;margin:0 0 .4rem;letter-spacing:-.01em}
+.proj p{margin:0 0 .6rem;color:var(--muted)}
+.proj .meta{color:var(--ink);font-weight:600;font-size:.95rem}
+.tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem}
+.tools h3{margin:0 0 .3rem;font-size:1.15rem}
+.tools p{margin:0;color:var(--muted)}
+.about{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:2.5rem}
+.about ul{margin:0;padding:0;list-style:none}
+.about li{padding:.5rem 0;border-bottom:1px solid var(--line)}
+footer{padding:2rem 0 3rem;color:var(--muted);border-top:1px solid var(--line);font-size:.95rem}
+@media (max-width:760px){
+  .hero,.proj,.about{grid-template-columns:1fr}
+  .proj:nth-child(even) .vid{order:0}
+  nav a{margin:0 1rem 0 0}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <strong>Collin Verbanatz</strong>
+    <nav aria-label="Main"><a href="#work">Work</a><a href="#tools">Tools</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
+  </header>
+
+  <main>
+  <div class="hero">
+    <div>
+      <h1>Rigs that animators enjoy using.</h1>
+      <p class="lead">I’m Collin, a character TD who builds production-ready rigs and the Python tools that make rigging faster. Drag the yellow control to try the arm rig on the right.</p>
+      <a class="btn" href="https://www.youtube.com/watch?v=eBq3QsrdcZ8" target="_blank" rel="noopener">Watch the demo reel</a><a class="btn alt" href="#contact">Get in touch</a>
+    </div>
+    <div class="viewport">
+      <svg id="rig" viewBox="0 0 600 420" role="img" aria-label="Interactive two-bone IK arm. Drag the yellow circle to move the hand.">
+        <defs><pattern id="g" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="var(--grid)" stroke-width="1"/></pattern></defs>
+        <rect width="600" height="420" fill="url(#g)"/>
+        <line x1="0" y1="360" x2="600" y2="360" stroke="var(--ctl-red)" stroke-width="2" opacity=".5"/>
+        <g id="skin" stroke="var(--skin)" stroke-linecap="round" fill="none"><line id="s1" stroke-width="46"/><line id="s2" stroke-width="34"/></g>
+        <g stroke="var(--ink)" stroke-width="3" stroke-linecap="round"><line id="b1"/><line id="b2"/></g>
+        <g fill="var(--bg)" stroke="var(--ink)" stroke-width="3"><circle id="j0" r="9"/><circle id="j1" r="9"/><circle id="j2" r="7"/></g>
+        <rect id="root" width="44" height="44" rx="4" fill="none" stroke="var(--ctl-blue)" stroke-width="4"/>
+        <circle id="pole" r="10" fill="none" stroke="var(--ctl-red)" stroke-width="3"/>
+        <g id="ik" style="cursor:grab" tabindex="0" role="slider" aria-label="IK hand control">
+          <circle id="ikc" r="30" fill="rgba(255,201,51,.12)" stroke="var(--ctl-yellow)" stroke-width="5"/>
+          <circle r="4" fill="var(--ctl-yellow)"/>
+        </g>
+      </svg>
+      <p class="hint">Two-bone IK, live in your browser</p>
+    </div>
+  </div>
+
+  <section id="work">
+    <h2>Selected rigs</h2>
+    <p class="sub">Current production work on BYU films and games. Clips and breakdowns for each rig are coming soon.</p>
+
+    <article class="proj">
+      <div class="vid"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M10 8.5l6 3.5-6 3.5z"/></svg>Rig clip coming soon</div></div>
+      <div>
+        <h3>Sandwich Kwon Do (BYU short film)</h3>
+        <p>Production-ready character rigs and nine prop rigs, plus a custom vehicle rig built with mGear that has working steering, suspension, automatic wheel rotation, and tire deformation.</p>
+        <p class="meta">Rigging Technical Director, Jan 2026 to present. Maya, mGear, Python.</p>
+      </div>
+    </article>
+
+    <article class="proj">
+      <div class="vid"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M10 8.5l6 3.5-6 3.5z"/></svg>Rig clip coming soon</div></div>
+      <div>
+        <h3>Lantern of Souls (BYU video game)</h3>
+        <p>Game-ready rigging solutions focused on animator usability and performance, including skinning, deformation, and character setup workflows, built alongside artists and programmers.</p>
+        <p class="meta">Rigging Lead, Sep 2026 to present. Maya, Unreal Engine.</p>
+      </div>
+    </article>
+
+    <article class="proj">
+      <div class="vid"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M10 8.5l6 3.5-6 3.5z"/></svg>Rig clip coming soon</div></div>
+      <div>
+        <h3>Honey Business (BYU short film)</h3>
+        <p>Prop rigs for a short film, made as part of a production team one class ahead of my cohort.</p>
+        <p class="meta">Rigging Artist, Oct 2025 to Apr 2026. Maya.</p>
+      </div>
+    </article>
+  </section>
+
+  <section id="tools">
+    <h2>Tools and scripting</h2>
+    <p class="sub">I build the systems that rigs are made from. Code is on <a href="https://github.com/collinverbanatz" target="_blank" rel="noopener">GitHub</a>.</p>
+    <div class="tools">
+      <div><h3>Modular auto-rigger</h3><p>A guide-based Python system for Maya that lets riggers generate and customize character rigs.</p></div>
+      <div><h3>mGear vehicle rig</h3><p>A reusable vehicle setup with steering, suspension, automatic wheel rotation, and tire deformation.</p></div>
+      <div><h3>Pipeline support</h3><p>Working with animators, artists, and technical leads to solve production problems as they come up.</p></div>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>About</h2>
+    <div class="about">
+      <p>I’m a Computer Science student at BYU (Animation &amp; Games emphasis, graduating April 2027) working as a character TD on student films and games. Before that I produced 12+ short 3D animations for BYU Information Systems and designed a mascot game for students to play during football games. I’m looking to contribute to character rigging and technical art pipelines for animated projects.</p>
+      <ul>
+        <li>Maya, mGear, Unreal Engine</li>
+        <li>Python, C++, C, Java, Linux</li>
+        <li>Cinema 4D, ZBrush, Substance Painter</li>
+        <li>Photoshop, After Effects</li>
+        <li>Fluent in English and Spanish</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p class="sub">Open to character rigging and technical art roles.</p>
+    <a class="btn" href="mailto:collinverbanatz@gmail.com">collinverbanatz@gmail.com</a>
+    <p><a href="https://github.com/collinverbanatz" target="_blank" rel="noopener">GitHub</a> · <a href="https://www.youtube.com/watch?v=eBq3QsrdcZ8" target="_blank" rel="noopener">Demo reel</a></p>
+  </section>
+  </main>
+
+  <footer>© 2026 Collin Verbanatz</footer>
+</div>
+
+<script>
+(function(){
+  var svg=document.getElementById('rig'),$=function(i){return document.getElementById(i)};
+  var R={x:150,y:330},L1=150,L2=135,T={x:430,y:200},dragging=false,user=false;
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function set(e,o){for(var k in o)e.setAttribute(k,o[k])}
+  function solve(){
+    var dx=T.x-R.x,dy=T.y-R.y,d=Math.hypot(dx,dy),max=L1+L2-1;
+    if(d>max){dx*=max/d;dy*=max/d;d=max}
+    if(d<40){d=40}
+    var base=Math.atan2(dy,dx);
+    var a=Math.acos(Math.max(-1,Math.min(1,(L1*L1+d*d-L2*L2)/(2*L1*d))));
+    var ang=base-a; // elbow bends upward
+    var E={x:R.x+Math.cos(ang)*L1,y:R.y+Math.sin(ang)*L1};
+    var H={x:R.x+dx,y:R.y+dy};
+    draw(E,H);
+  }
+  function draw(E,H){
+    ['s1','b1'].forEach(function(i){set($(i),{x1:R.x,y1:R.y,x2:E.x,y2:E.y})});
+    ['s2','b2'].forEach(function(i){set($(i),{x1:E.x,y1:E.y,x2:H.x,y2:H.y})});
+    set($('j0'),{cx:R.x,cy:R.y});set($('j1'),{cx:E.x,cy:E.y});set($('j2'),{cx:H.x,cy:H.y});
+    set($('root'),{x:R.x-22,y:R.y+30});
+    set($('pole'),{cx:E.x,cy:E.y-46});
+    set($('ik'),{transform:'translate('+T.x+','+T.y+')'});
+  }
+  function pt(ev){var p=svg.createSVGPoint();p.x=ev.clientX;p.y=ev.clientY;return p.matrixTransform(svg.getScreenCTM().inverse())}
+  var ik=$('ik');
+  ik.addEventListener('pointerdown',function(e){dragging=user=true;ik.setPointerCapture(e.pointerId);ik.style.cursor='grabbing'});
+  ik.addEventListener('pointermove',function(e){if(!dragging)return;var p=pt(e);T.x=Math.max(20,Math.min(580,p.x));T.y=Math.max(20,Math.min(400,p.y));solve()});
+  ik.addEventListener('pointerup',function(){dragging=false;ik.style.cursor='grab'});
+  ik.addEventListener('keydown',function(e){var s=14,k=e.key;
+    if(k==='ArrowLeft')T.x-=s;else if(k==='ArrowRight')T.x+=s;else if(k==='ArrowUp')T.y-=s;else if(k==='ArrowDown')T.y+=s;else return;
+    user=true;e.preventDefault();solve()});
+  solve();
+  if(!reduce){
+    var t0=performance.now();
+    (function loop(t){
+      if(!user){var s=(t-t0)/1000;T.x=420+Math.cos(s*.9)*60;T.y=210+Math.sin(s*1.3)*55;solve();requestAnimationFrame(loop)}
+    })(t0);
+  }
+})();
+</script>
+</body>
+</html>
