@@ -12,7 +12,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --page:#050506; --ink:#f2f2ef; --muted:#9a9a97; --line:rgba(255,255,255,.14); --acc:#6f8fff;
+  --page:#050506; --ink:#f2f2ef; --muted:#9a9a97; --line:rgba(255,255,255,.14); --acc:#78896a;
   --head:"Space Grotesk","Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
   --sans:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
   color-scheme:dark;
@@ -26,10 +26,38 @@ img,video{max-width:100%}
 .wrap{max-width:1360px;margin:0 auto;padding:0 clamp(1.25rem,4vw,3.5rem);width:100%}
 #bar{position:fixed;left:0;top:0;height:3px;width:100%;background:var(--acc);transform:scaleX(0);transform-origin:0 50%;z-index:120}
 
-.tone-dark{--s-bg:#101012;--s-ink:#f2f2ef;--s-muted:#a3a3a0;--s-line:rgba(255,255,255,.18);--s-acc:#7d9bff;--s-chip:rgba(255,255,255,.07)}
-.tone-light{--s-bg:#f4f4f1;--s-ink:#111113;--s-muted:#5d5d59;--s-line:rgba(0,0,0,.16);--s-acc:#2f55e6;--s-chip:rgba(0,0,0,.05)}
+.tone-dark{--s-bg:#101012;--s-ink:#f2f2ef;--s-muted:#a3a3a0;--s-line:rgba(255,255,255,.18);--s-acc:#a7b894;--s-chip:rgba(255,255,255,.07)}
+.tone-light{--s-bg:#f4f4f1;--s-ink:#111113;--s-muted:#5d5d59;--s-line:rgba(0,0,0,.16);--s-acc:#5d6c50;--s-chip:rgba(0,0,0,.05)}
 
-/* header */
+
+/* left sidebar: always visible */
+:root{--side:15.5rem}
+main,footer{margin-left:var(--side)}
+.side{position:fixed;left:.75rem;top:.75rem;bottom:.75rem;width:calc(var(--side) - 1.5rem);z-index:100;background:linear-gradient(165deg,#79876a 0%,#5d6c50 55%,#46533c 100%);color:#fff;border-radius:26px;box-shadow:0 20px 50px -20px rgba(30,40,22,.75);display:flex;flex-direction:column;padding:1.5rem 1.25rem 1.25rem;overflow-y:auto;scrollbar-width:none}
+.side::-webkit-scrollbar{display:none}
+.side .logo{font-size:1.5rem;line-height:1.1;display:block;color:#fff}
+.side .who{margin:.6rem 0 1.6rem;font-size:.9rem;color:rgba(255,255,255,.75)}
+.nav,.nav ul{list-style:none;margin:0;padding:0}
+.nav>li{margin-bottom:.15rem}
+.nav a{position:relative;display:block;text-decoration:none;font-family:var(--head);font-weight:500;color:rgba(255,255,255,.72);padding:.4rem 0 .4rem 1.1rem;transition:color .2s}
+.nav a::before{content:"";position:absolute;left:0;top:50%;width:.45rem;height:.45rem;margin-top:-.225rem;border-radius:50%;border:2px solid currentColor;transition:background .2s,transform .2s}
+.nav a:hover{color:#fff}
+.nav a.on{color:#fff}
+.nav a.on::before{background:#fff;border-color:#fff;transform:scale(1.3)}
+.nav>li>a{font-size:1.1rem}
+.nav ul{margin:.1rem 0 .6rem .5rem;border-left:1px solid rgba(255,255,255,.28)}
+.nav ul a{font-size:.92rem;font-weight:400;padding:.25rem 0 .25rem 1.1rem}
+.nav ul a::before{display:none}
+.nav ul a.on{color:#fff;font-weight:600}
+.sfoot{margin-top:auto;padding-top:1.25rem;display:grid;gap:1rem}
+.sfoot .pill{justify-content:center;background:#fff;border-color:#fff;color:#2b3624}
+.sfoot .pill:hover{background:#0b0b0c;border-color:#0b0b0c;color:#fff}
+.soc{display:flex;gap:1rem;flex-wrap:wrap;font-size:.85rem;color:rgba(255,255,255,.75)}
+.soc a{text-decoration:none}.soc a:hover{color:#fff;text-decoration:underline}
+@media (min-width:861px){.hdr,#menu{display:none}}
+@media (max-width:860px){.side{display:none}main,footer{margin-left:0}}
+
+/* header (phones only) */
 .hdr{position:fixed;inset:0 0 auto 0;z-index:100;padding-top:env(safe-area-inset-top,0px);transition:background .4s,border-color .4s;border-bottom:1px solid transparent}
 .hdr.solid{background:rgba(5,5,6,.82);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-color:var(--line)}
 .hdr .wrap{display:flex;justify-content:space-between;align-items:center;height:4.5rem;max-width:none;gap:1rem}
@@ -74,12 +102,6 @@ img,video{max-width:100%}
 @keyframes fade{to{opacity:1}}
 .cta{display:flex;gap:.75rem;flex-wrap:wrap}
 
-/* reel */
-.reel .si{background:#000;padding:0;display:block}
-.reel iframe:not([src]){visibility:hidden}
-.reel iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
-.reel .rl{position:absolute;left:clamp(1.25rem,4vw,3.5rem);top:5.5rem;z-index:2;font-family:var(--head);font-weight:600;font-size:1rem;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.6);pointer-events:none}
-
 /* generic */
 h2{font-family:var(--head);font-weight:700;font-size:clamp(2.4rem,6vw,5rem);line-height:1;letter-spacing:-.045em;margin:0 0 1.25rem}
 .btn{display:inline-flex;align-items:center;gap:.7rem;text-decoration:none;font-family:var(--head);font-weight:600;font-size:1rem;padding:.9rem 1.6rem;border-radius:999px;background:var(--s-ink);color:var(--s-bg);border:2px solid var(--s-ink);transition:background .25s,color .25s,border-color .25s}
@@ -109,9 +131,11 @@ h2{font-family:var(--head);font-weight:700;font-size:clamp(2.4rem,6vw,5rem);line
 .text .r p{margin:0 0 1.4rem;color:var(--s-muted);font-size:1.05rem;max-width:36rem}
 .meta{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.5rem}
 .meta li{padding:.3rem .85rem;border-radius:999px;background:var(--s-chip);font-size:.85rem;font-weight:500}
-.meta .role{background:var(--s-acc);color:#fff}
+.meta .role{background:#5d6c50;color:#fff}
 
 /* full-screen carousel */
+.car iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
+.car iframe:not([src]){visibility:hidden}
 .car{position:relative;height:100vh;height:100svh;background:#000;overflow:hidden;outline-offset:-4px}
 .track{display:flex;height:100%;transition:transform .8s cubic-bezier(.7,0,.2,1)}
 .cs{position:relative;flex:0 0 100%;height:100%;background:#000}
@@ -188,6 +212,35 @@ footer{background:var(--page);padding:clamp(3rem,7vh,4.5rem) 0 2rem}
 <body>
 <div id="bar" aria-hidden="true"></div>
 
+<aside class="side" aria-label="Site menu">
+  <a class="logo" href="#top">Collin<br>Verbanatz</a>
+  <p class="who">Character TD (Rigging)</p>
+  <nav aria-label="Main">
+    <ul class="nav">
+      <li><a href="#reel" data-s="reel">Demo reel</a></li>
+      <li><a href="#projects" data-s="projects">Projects</a>
+        <ul>
+          <li><a href="#p1" data-s="p1">Sam Wichman</a></li>
+          <li><a href="#p2" data-s="p2">mGear Car Rig</a></li>
+          <li><a href="#p3" data-s="p3">Thiago</a></li>
+          <li><a href="#p4" data-s="p4">Custom Auto Rigger</a></li>
+          <li><a href="#p5" data-s="p5">Pan Mimic</a></li>
+          <li><a href="#p6" data-s="p6">Phil Tenderfoot</a></li>
+          <li><a href="#p7" data-s="p7">Samurai Character</a></li>
+          <li><a href="#p8" data-s="p8">Western Still Life</a></li>
+          <li><a href="#p9" data-s="p9">Tree Rig</a></li>
+        </ul>
+      </li>
+      <li><a href="#about" data-s="about">About</a></li>
+      <li><a href="#contact" data-s="contact">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="sfoot">
+    <a class="pill solid" href="Collin_Verbanatz_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+    <div class="soc"><a href="https://github.com/collinverbanatz" target="_blank" rel="noopener">GitHub</a><a href="https://www.youtube.com/watch?v=eBq3QsrdcZ8" target="_blank" rel="noopener">YouTube</a><a href="mailto:collinverbanatz@gmail.com">Email</a></div>
+  </div>
+</aside>
+
 <header class="hdr" id="hdr">
   <div class="wrap">
     <a class="logo" href="#top">Collin Verbanatz</a>
@@ -221,10 +274,15 @@ footer{background:var(--page);padding:clamp(3rem,7vh,4.5rem) 0 2rem}
     </div>
   </section>
 
-  <section class="slide reel" id="reel" data-fx>
-    <div class="si">
-      <span class="rl">Demo reel</span>
-      <iframe id="yt" title="Collin Verbanatz demo reel" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" data-src="https://www.youtube.com/embed/eBq3QsrdcZ8?autoplay=1&mute=1&loop=1&playlist=eBq3QsrdcZ8&playsinline=1&rel=0&modestbranding=1&enablejsapi=1"></iframe>
+  <section class="slide reel" id="reel" data-fx data-tall>
+    <div class="si text tone-light">
+      <div class="wrap grid">
+        <div class="l reveal"><span class="tag">Highlights<i></i>Rigging and animation</span><h3>Demo Reel</h3></div>
+        <div class="r reveal" style="--d:120ms"><p>A short look at my recent rigging work.</p><a class="btn" href="https://www.youtube.com/watch?v=eBq3QsrdcZ8" target="_blank" rel="noopener">Watch on YouTube</a></div>
+      </div>
+      <div class="car">
+        <iframe id="yt" title="Collin Verbanatz demo reel" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" data-src="https://www.youtube.com/embed/eBq3QsrdcZ8?autoplay=1&mute=1&loop=1&playlist=eBq3QsrdcZ8&playsinline=1&rel=0&modestbranding=1&enablejsapi=1"></iframe>
+      </div>
     </div>
   </section>
 
@@ -429,6 +487,21 @@ footer{background:var(--page);padding:clamp(3rem,7vh,4.5rem) 0 2rem}
   addEventListener('load',function(){frame(true)});
   if(doc.fonts&&doc.fonts.ready)doc.fonts.ready.then(function(){frame(true)});
   frame(true);
+
+
+  /* sidebar: highlight where you are */
+  var sl=[].slice.call(doc.querySelectorAll('.side a[data-s]'));
+  var sids=sl.map(function(a){return a.dataset.s});
+  var ssec=sids.map(function(id){return doc.getElementById(id)});
+  function spy(){
+    var mid=innerHeight*.45,cur='';
+    ssec.forEach(function(el,i){var r=el.getBoundingClientRect();if(r.top<=mid&&r.bottom>mid)cur=sids[i]});
+    sl.forEach(function(a){
+      var id=a.dataset.s,on=id===cur||(id==='projects'&&/^p\d$/.test(cur));
+      a.classList.toggle('on',on);
+    });
+  }
+  addEventListener('scroll',spy,{passive:true});addEventListener('resize',spy);spy();
 
   /* faster scrolling with the mouse wheel / trackpad */
   if(!reduce&&matchMedia('(pointer:fine)').matches){
