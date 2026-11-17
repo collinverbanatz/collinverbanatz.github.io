@@ -4,554 +4,328 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Collin Verbanatz – Character Technical Director</title>
-<meta name="description"
-  content="Collin Verbanatz, character technical director. Rigs, tools and character work for animated films and games.">
+<meta name="description" content="Collin Verbanatz, character technical director. Rigs, tools and character work for animated films and games.">
 <meta name="theme-color" content="#050506">
 <script>document.documentElement.classList.add('js')</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-  href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap"
-  rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --page:#050506; --ink:#efe9df; --muted:#9b958b; --line:rgba(239,233,223,.14); --gold:#c9a27e; --gold2:#e3c3a0;
-  --serif:"Cormorant Garamond","Cormorant",Georgia,"Times New Roman",serif;
-  --sans:"Jost",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --page:#050506; --ink:#f2f2ef; --muted:#9a9a97; --line:rgba(255,255,255,.14); --acc:#6f8fff;
+  --head:"Space Grotesk","Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --sans:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
   color-scheme:dark;
 }
 html{scroll-behavior:smooth;background:var(--page)}
 *,*::before,*::after{box-sizing:border-box}
-body{margin:0;background:var(--page);color:var(--ink);font-family:var(--sans);font-weight:300;font-size:1.0625rem;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{margin:0;background:var(--page);color:var(--ink);font-family:var(--sans);font-weight:400;font-size:1.05rem;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit}
 img,video{max-width:100%}
-:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
 .wrap{max-width:1360px;margin:0 auto;padding:0 clamp(1.25rem,4vw,3.5rem);width:100%}
-.grain{position:fixed;inset:-50%;z-index:90;pointer-events:none;opacity:.06;
-  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");animation:grain 1.2s steps(6) infinite}
-@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,-1%)}80%{transform:translate(3%,3%)}100%{transform:translate(0,0)}}
-#bar{position:fixed;left:0;top:0;height:2px;width:100%;background:var(--gold);transform:scaleX(0);transform-origin:0 50%;z-index:120}
+#bar{position:fixed;left:0;top:0;height:3px;width:100%;background:var(--acc);transform:scaleX(0);transform-origin:0 50%;z-index:120}
 
-/* tones: every section alternates black / white */
-.tone-dark{--s-bg:#111113;--s-ink:#efe9df;--s-muted:#9b958b;--s-line:rgba(239,233,223,.18);--s-accent:#c9a27e}
-.tone-light{--s-bg:#f4f0e8;--s-ink:#0d0d0f;--s-muted:#5f5a51;--s-line:rgba(13,13,15,.2);--s-accent:#8a6841}
+.tone-dark{--s-bg:#101012;--s-ink:#f2f2ef;--s-muted:#a3a3a0;--s-line:rgba(255,255,255,.18);--s-acc:#7d9bff;--s-chip:rgba(255,255,255,.07)}
+.tone-light{--s-bg:#f4f4f1;--s-ink:#111113;--s-muted:#5d5d59;--s-line:rgba(0,0,0,.16);--s-acc:#2f55e6;--s-chip:rgba(0,0,0,.05)}
 
-/* header + menu */
+/* header */
 .hdr{position:fixed;inset:0 0 auto 0;z-index:100;padding-top:env(safe-area-inset-top,0px);transition:background .4s,border-color .4s;border-bottom:1px solid transparent}
-.hdr.solid{background:rgba(5,5,6,.8);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-color:var(--line)}
-.hdr .wrap{display:flex;justify-content:space-between;align-items:center;height:4.5rem;max-width:none}
-.logo{text-decoration:none;font-family:var(--serif);font-size:1.5rem;letter-spacing:.22em;text-transform:uppercase;font-weight:400;color:var(--ink)}
-.menu-btn{background:none;border:0;color:var(--ink);font:inherit;font-size:.8rem;letter-spacing:.3em;text-transform:uppercase;display:flex;align-items:center;gap:.9rem;cursor:pointer;padding:.5rem 0}
-.menu-btn i{display:block;width:2rem;height:10px;position:relative}
-.menu-btn i::before,.menu-btn i::after{content:"";position:absolute;left:0;height:1px;background:currentColor;transition:transform .4s,top .4s;width:100%}
-.menu-btn i::before{top:1px}.menu-btn i::after{top:8px}
-.menu-open .menu-btn i::before{top:4px;transform:rotate(20deg)}
-.menu-open .menu-btn i::after{top:4px;transform:rotate(-20deg)}
-#menu{position:fixed;inset:0;z-index:95;background:#080809;display:flex;flex-direction:column;justify-content:center;padding:6rem clamp(1.25rem,6vw,6rem) 3rem;clip-path:inset(0 0 100% 0);visibility:hidden;transition:clip-path .8s cubic-bezier(.7,0,.2,1),visibility 0s .8s}
-.menu-open #menu{clip-path:inset(0);visibility:visible;transition:clip-path .8s cubic-bezier(.7,0,.2,1)}
+.hdr.solid{background:rgba(5,5,6,.82);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-color:var(--line)}
+.hdr .wrap{display:flex;justify-content:space-between;align-items:center;height:4.5rem;max-width:none;gap:1rem}
+.logo{text-decoration:none;font-family:var(--head);font-size:1.3rem;font-weight:600;letter-spacing:-.02em;color:#fff}
+.hbtns{display:flex;align-items:center;gap:.6rem}
+.pill{display:inline-flex;align-items:center;gap:.6rem;padding:.65rem 1.25rem;border-radius:999px;font:inherit;font-family:var(--head);font-weight:600;font-size:.95rem;text-decoration:none;cursor:pointer;border:2px solid #fff;color:#fff;background:rgba(0,0,0,.25);transition:background .25s,color .25s,transform .25s}
+.pill:hover{background:#fff;color:#000}
+.pill.solid{background:#fff;color:#000}
+.pill.solid:hover{background:var(--acc);border-color:var(--acc);color:#fff}
+.pill i{display:block;width:1.1rem;height:9px;position:relative}
+.pill i::before,.pill i::after{content:"";position:absolute;left:0;width:100%;height:2px;background:currentColor;border-radius:2px;transition:transform .35s,top .35s}
+.pill i::before{top:0}.pill i::after{top:7px}
+.menu-open .pill i::before{top:3px;transform:rotate(25deg)}
+.menu-open .pill i::after{top:3px;transform:rotate(-25deg)}
+#menu{position:fixed;inset:0;z-index:95;background:#08080a;display:flex;flex-direction:column;justify-content:center;padding:6rem clamp(1.25rem,6vw,6rem) 3rem;clip-path:inset(0 0 100% 0);visibility:hidden;transition:clip-path .7s cubic-bezier(.7,0,.2,1),visibility 0s .7s}
+.menu-open #menu{clip-path:inset(0);visibility:visible;transition:clip-path .7s cubic-bezier(.7,0,.2,1)}
 #menu ol{list-style:none;margin:0;padding:0}
 #menu li{border-bottom:1px solid var(--line)}
-#menu li a{display:block;text-decoration:none;font-family:var(--serif);font-size:clamp(2.4rem,8vw,5.5rem);font-weight:300;line-height:1.15;padding:.5rem 0;transition:color .3s,padding-left .4s}
-#menu li a:hover{color:var(--gold2);padding-left:1.2rem}
-#menu .mfoot{margin-top:2.5rem;display:flex;gap:2rem;flex-wrap:wrap;font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
-#menu .mfoot a{text-decoration:none}#menu .mfoot a:hover{color:var(--ink)}
+#menu li a{display:block;text-decoration:none;font-family:var(--head);font-weight:600;letter-spacing:-.03em;font-size:clamp(2.2rem,7vw,4.8rem);line-height:1.2;padding:.5rem 0;transition:color .25s,padding-left .35s}
+#menu li a:hover{color:var(--acc);padding-left:1rem}
+#menu .mfoot{margin-top:2rem;display:flex;gap:1.75rem;flex-wrap:wrap;font-size:1rem;color:var(--muted)}
+#menu .mfoot a{text-decoration:none}#menu .mfoot a:hover{color:#fff}
 
-/* slides: each section is a full screen "layer" that scales 75% -> 100% */
+/* slides */
 .slide{position:relative;margin:0 0 .5rem}
 .si{position:relative;min-height:100vh;min-height:100svh;overflow:hidden;background:var(--s-bg);color:var(--s-ink);transform-origin:50% 50%;will-change:transform;display:flex;flex-direction:column;justify-content:center}
 .slide:last-child{margin-bottom:0}
 
 /* hero */
-.hero .si{background:#050506;justify-content:flex-end;isolation:isolate}
-.hero-bg{position:absolute;inset:-6% 0;z-index:-2;will-change:transform}
-.hero-bg video{width:100%;height:100%;object-fit:cover;filter:saturate(.8) contrast(1.05) brightness(.72)}
-.hero .si::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(5,5,6,.55) 0%,rgba(5,5,6,.1) 35%,rgba(5,5,6,.78) 85%,#050506 100%)}
-.hero-in{padding-bottom:clamp(4.5rem,11vh,8rem);will-change:transform,opacity}
-.eyebrow{display:flex;align-items:center;gap:1.1rem;font-size:.78rem;letter-spacing:.34em;text-transform:uppercase;color:var(--gold2);margin:0 0 1.6rem}
-.eyebrow::before{content:"";width:3.5rem;height:1px;background:var(--gold)}
-.name{font-family:var(--serif);font-weight:300;font-size:clamp(3.8rem,13.5vw,13rem);line-height:.9;letter-spacing:-.02em;margin:0 0 2rem;color:#efe9df}
-.line{display:block;overflow:hidden;padding:.04em .1em .1em 0;margin-bottom:-.1em}
-.line>span{display:block;transform:translateY(112%);animation:rise 1.3s cubic-bezier(.16,.8,.2,1) forwards}
-.name .l2{font-style:italic;color:var(--gold2)}
+.hero .si{background:#050506;justify-content:flex-end;isolation:isolate;color:#fff}
+.vbg{position:absolute;inset:-6% 0;z-index:-2;will-change:transform}
+.vbg video{width:100%;height:100%;object-fit:cover;filter:brightness(.62)}
+.hero .si::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(5,5,6,.5) 0%,rgba(5,5,6,.05) 35%,rgba(5,5,6,.75) 90%)}
+.hero-in{padding-bottom:clamp(3.5rem,9vh,6rem);will-change:transform,opacity}
+.eyebrow{font-family:var(--head);font-weight:500;font-size:1.05rem;color:#d8d8d4;margin:0 0 1rem}
+.name{font-family:var(--head);font-weight:700;font-size:clamp(3.4rem,12.5vw,11.5rem);line-height:.92;letter-spacing:-.055em;margin:0 0 1.75rem}
+.line{display:block;overflow:hidden;padding:.02em .05em .08em 0;margin-bottom:-.06em}
+.line>span{display:block;transform:translateY(112%);animation:rise 1.1s cubic-bezier(.16,.8,.2,1) forwards}
 @keyframes rise{to{transform:none}}
-.hero-foot{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;flex-wrap:wrap}
-.tagline{font-family:var(--serif);font-size:clamp(1.3rem,2.6vw,2rem);font-weight:300;font-style:italic;max-width:26ch;line-height:1.25;margin:0;color:#efe9df}
-.fade{opacity:0;animation:fade 1.4s ease forwards}
+.sub{font-size:clamp(1.1rem,2vw,1.45rem);max-width:34rem;margin:0 0 2rem;color:#e4e4e0;line-height:1.45}
+.fade{opacity:0;animation:fade 1s ease forwards}
 @keyframes fade{to{opacity:1}}
-.cue{display:flex;align-items:center;gap:1rem;font-size:.72rem;letter-spacing:.34em;text-transform:uppercase;color:#9b958b;text-decoration:none}
-.cue i{display:block;width:1px;height:3.5rem;background:linear-gradient(var(--gold),transparent);animation:drip 2.2s ease-in-out infinite;transform-origin:top}
-@keyframes drip{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
+.cta{display:flex;gap:.75rem;flex-wrap:wrap}
 
-/* generic type */
-.kicker{display:flex;align-items:center;gap:1rem;font-size:.75rem;letter-spacing:.34em;text-transform:uppercase;color:var(--s-accent);margin:0 0 1.5rem}
-.kicker::before{content:"";width:3rem;height:1px;background:var(--s-accent)}
-h2{font-family:var(--serif);font-weight:300;font-size:clamp(2.6rem,6.5vw,6rem);line-height:1.02;letter-spacing:-.015em;margin:0 0 1.5rem}
-h2 em{font-style:italic;color:var(--s-accent)}
-.btn{display:inline-flex;align-items:center;gap:1rem;text-decoration:none;font-size:.78rem;letter-spacing:.28em;text-transform:uppercase;padding:1.1rem 2rem;border:1px solid currentColor;transition:background .35s,color .35s}
-.btn::after{content:"→";letter-spacing:0;transition:transform .35s}
-.btn:hover{background:var(--s-ink);color:var(--s-bg);border-color:var(--s-ink)}.btn:hover::after{transform:translateX(5px)}
+/* reel */
+.reel .si{background:#000;padding:0;display:block}
+.reel iframe:not([src]){visibility:hidden}
+.reel iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
+.reel .rl{position:absolute;left:clamp(1.25rem,4vw,3.5rem);top:5.5rem;z-index:2;font-family:var(--head);font-weight:600;font-size:1rem;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.6);pointer-events:none}
 
-/* statement */
-.statement{text-align:center}
-.statement .kicker{justify-content:center}.statement .kicker::before{display:none}
-.statement h2{max-width:16ch;margin:0 auto 2rem;font-size:clamp(3rem,8vw,7.5rem)}
-.statement p{max-width:42rem;margin:0 auto;color:var(--s-muted);font-size:1.2rem}
+/* generic */
+h2{font-family:var(--head);font-weight:700;font-size:clamp(2.4rem,6vw,5rem);line-height:1;letter-spacing:-.045em;margin:0 0 1.25rem}
+.btn{display:inline-flex;align-items:center;gap:.7rem;text-decoration:none;font-family:var(--head);font-weight:600;font-size:1rem;padding:.9rem 1.6rem;border-radius:999px;background:var(--s-ink);color:var(--s-bg);border:2px solid var(--s-ink);transition:background .25s,color .25s,border-color .25s}
+.btn:hover{background:var(--s-acc);border-color:var(--s-acc);color:#fff}
+.btn.ghost{background:transparent;color:var(--s-ink)}
+.btn.ghost:hover{background:var(--s-ink);border-color:var(--s-ink);color:var(--s-bg)}
 
-/* index rail (landscape cards) */
-.rail-head{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;margin-bottom:2.5rem;flex-wrap:wrap}
-.rail-head h2{margin:0}
-.arrows{display:flex;gap:.75rem}
-.arrows button{width:3.2rem;height:3.2rem;border:1px solid var(--s-line);background:none;color:var(--s-ink);cursor:pointer;font-size:1.1rem;transition:background .3s,color .3s}
-.arrows button:hover{background:var(--s-ink);color:var(--s-bg)}
-.rail{display:flex;gap:1.5rem;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 clamp(1.25rem,4vw,3.5rem) 1rem;scrollbar-width:none;-webkit-overflow-scrolling:touch}
-.rail::-webkit-scrollbar{display:none}
-.ri{flex:0 0 clamp(280px,32vw,500px);scroll-snap-align:start;text-decoration:none}
-.ri .ph{aspect-ratio:16/10;overflow:hidden;background:#1c1c1f;border:1px solid var(--s-line);margin-bottom:1.1rem}
-.ri .ph img{width:100%;height:100%;object-fit:cover;filter:saturate(.85) brightness(.85);transition:transform 1.1s cubic-bezier(.2,.7,.2,1),filter .6s}
-.ri:hover .ph img{transform:scale(1.07);filter:none}
-.ri .ph.empty{display:grid;place-items:center;background:linear-gradient(160deg,#1a1a1d,#0d0d0f)}
-.ri .ph.empty small{font-family:var(--serif);font-style:italic;font-size:1.2rem;color:var(--muted)}
-.ri strong{display:block;font-family:var(--serif);font-weight:400;font-size:1.7rem;line-height:1.2}
-.ri em{font-style:normal;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--s-muted)}
+/* index: all projects on one screen */
+.index .si{padding:6rem 0 3rem}
+.index h2{margin:0 0 1.5rem}
+.igrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(.75rem,2vh,1.4rem) clamp(.75rem,1.6vw,1.5rem)}
+.ri{text-decoration:none;display:block}
+.ri .ph{height:clamp(90px,15.5vh,200px);overflow:hidden;background:#1c1c1f;border-radius:10px}
+.ri .ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.ri:hover .ph img{transform:scale(1.07)}
+.ri .ph.empty{display:grid;place-items:center;background:repeating-linear-gradient(135deg,#17171a 0 12px,#1c1c20 12px 24px)}
+.ri .ph.empty small{font-family:var(--head);font-size:.9rem;color:var(--s-muted)}
+.ri strong{display:block;font-family:var(--head);font-weight:600;font-size:1.1rem;line-height:1.2;margin-top:.55rem;letter-spacing:-.01em}
+.ri em{font-style:normal;font-size:.85rem;color:var(--s-muted)}
 
-/* project text slides (landscape) */
-.text{padding:6rem 0 4rem}
-.grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:2rem clamp(2.5rem,7vw,8rem);align-items:end}
-.tag{display:flex;align-items:center;gap:.9rem;font-size:.76rem;letter-spacing:.28em;text-transform:uppercase;color:var(--s-accent);margin-bottom:1.4rem;flex-wrap:wrap}
-.tag i{display:block;width:2rem;height:1px;background:var(--s-accent)}
-.text h3{font-family:var(--serif);font-weight:300;font-size:clamp(3.2rem,8.5vw,9rem);line-height:.95;letter-spacing:-.02em;margin:0}
-.text .r p{margin:0 0 1.8rem;color:var(--s-muted);font-size:1.08rem;max-width:36rem}
-.meta{list-style:none;margin:0 0 2rem;padding:0;display:flex;flex-wrap:wrap;gap:.4rem 0;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--s-muted)}
-.meta li+li::before{content:"/";margin:0 .9rem;color:var(--s-line)}
-.meta .role{color:var(--s-accent);font-weight:500}
-.go{display:inline-flex;align-items:center;gap:.9rem;text-decoration:none;font-size:.76rem;letter-spacing:.28em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:.4rem}
-.go::after{content:"↓";letter-spacing:0;transition:transform .35s}.go:hover::after{transform:translateY(4px)}
-.soon{font-family:var(--serif);font-style:italic;font-size:1.3rem;color:var(--s-accent);margin:0!important}
+/* projects */
+.text{justify-content:flex-start;padding:7rem 0 0}
+.grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:2rem clamp(2.5rem,7vw,8rem);align-items:end;padding-bottom:clamp(2.5rem,6vh,4rem)}
+.tag{display:flex;align-items:center;gap:.7rem;font-family:var(--head);font-weight:500;font-size:.95rem;color:var(--s-acc);margin-bottom:1rem;flex-wrap:wrap}
+.tag i{display:block;width:1.5rem;height:2px;background:currentColor;border-radius:2px}
+.text h3{font-family:var(--head);font-weight:700;font-size:clamp(2.8rem,7.5vw,7.5rem);line-height:.95;letter-spacing:-.05em;margin:0}
+.text .r p{margin:0 0 1.4rem;color:var(--s-muted);font-size:1.05rem;max-width:36rem}
+.meta{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.5rem}
+.meta li{padding:.3rem .85rem;border-radius:999px;background:var(--s-chip);font-size:.85rem;font-weight:500}
+.meta .role{background:var(--s-acc);color:#fff}
 
-/* work lives inside each block */
-.text{justify-content:flex-start;padding:7rem 0 clamp(3rem,7vh,5rem)}
-.works{display:grid;gap:clamp(1.75rem,4vw,3rem);margin-top:clamp(2.5rem,7vh,4.5rem)}
-.works figure{margin:0}
-.m{position:relative;aspect-ratio:16/9;background:#000;overflow:hidden;box-shadow:0 30px 70px -30px rgba(0,0,0,.55)}
-.m video,.m img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;background:#000}
-.m.fit,.m.fit img{background:#303030;object-fit:contain}
-.works figcaption{margin-top:.9rem;font-family:var(--serif);font-style:italic;font-size:1.15rem;color:var(--s-muted)}
-.soonbox{display:grid;place-items:center;font-family:var(--serif);font-style:italic;font-size:1.5rem;color:var(--s-muted);
-  background:linear-gradient(110deg,transparent 30%,rgba(127,127,127,.12) 50%,transparent 70%) 0 0/250% 100%,var(--s-bg);border:1px dashed var(--s-line);box-shadow:none;animation:shimmer 4s linear infinite}
-@keyframes shimmer{to{background-position:-150% 0}}
+/* full-screen carousel */
+.car{position:relative;height:100vh;height:100svh;background:#000;overflow:hidden;outline-offset:-4px}
+.track{display:flex;height:100%;transition:transform .8s cubic-bezier(.7,0,.2,1)}
+.cs{position:relative;flex:0 0 100%;height:100%;background:#000}
+.cs video,.cs img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;background:#000}
+.cs.fit,.cs.fit img{background:#303030;object-fit:contain}
+.ccap{position:absolute;left:clamp(1.25rem,4vw,3.5rem);top:1.25rem;z-index:2;font-family:var(--head);font-weight:500;font-size:.95rem;color:#fff;padding:.35rem .9rem;border-radius:999px;background:rgba(0,0,0,.5);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);pointer-events:none}
+.cb{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:3.4rem;height:3.4rem;border-radius:50%;border:2px solid rgba(255,255,255,.85);background:rgba(0,0,0,.45);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:#fff;font-size:2rem;line-height:1;padding:0 0 .25rem;cursor:pointer;transition:background .25s,color .25s}
+.cb:hover{background:#fff;color:#000}
+.cb.prev{left:clamp(.75rem,2vw,2rem)}.cb.next{right:clamp(.75rem,2vw,2rem)}
+.dots{position:absolute;left:50%;bottom:4.6rem;transform:translateX(-50%);z-index:3;display:flex;gap:.5rem;padding:.4rem;border-radius:999px;background:rgba(0,0,0,.5);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.dots button{width:2.1rem;height:2.1rem;border-radius:50%;border:0;background:transparent;color:#fff;font-family:var(--head);font-weight:600;font-size:.9rem;cursor:pointer;transition:background .25s,color .25s}
+.dots button.on{background:#fff;color:#000}
+.dots button:not(.on):hover{background:rgba(255,255,255,.25)}
+.works{padding-bottom:clamp(2rem,5vh,3rem)}
+.m{aspect-ratio:16/9;background:var(--s-chip);overflow:hidden;border-radius:12px}
+.soonbox{display:grid;place-items:center;font-family:var(--head);font-weight:500;font-size:1.3rem;color:var(--s-muted);border:2px dashed var(--s-line);background:transparent}
 
 /* about */
-.about .grid{align-items:start}
-.about p{margin:0 0 1.5rem;color:var(--s-muted);font-size:1.15rem}
-.skills{list-style:none;margin:2rem 0 0;padding:0;display:flex;flex-wrap:wrap;gap:.5rem}
-.skills li{padding:.4rem 1rem;border:1px solid var(--s-line);font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--s-muted)}
-.about h2{font-size:clamp(3rem,7vw,6.5rem);margin:0}
+.about .si{padding:6rem 0 4rem}
+.about .grid{align-items:center;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);padding-bottom:0}
+.photo{position:relative;aspect-ratio:4/5;max-width:440px;border-radius:18px;overflow:hidden;background:linear-gradient(150deg,#1d2030,#14151b);display:grid;place-items:center}
+.photo span{font-family:var(--head);font-weight:700;font-size:6rem;letter-spacing:-.05em;color:rgba(255,255,255,.18)}
+.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.about h2{margin:2rem 0 0;font-size:clamp(2.6rem,5.5vw,4.6rem)}
+.about p{margin:0 0 1.25rem;color:var(--s-muted);font-size:1.12rem}
+.skills{list-style:none;margin:1.75rem 0 2rem;padding:0;display:flex;flex-wrap:wrap;gap:.5rem}
+.skills li{padding:.35rem .9rem;border-radius:999px;background:var(--s-chip);font-size:.85rem;font-weight:500}
 
 /* contact */
-.contact .si{background:#050506;text-align:center;align-items:center;isolation:isolate}
-.contact .bg{position:absolute;inset:-8% 0;z-index:-2}
-.contact .bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.45) saturate(.8)}
-.contact .si::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(5,5,6,.3),rgba(5,5,6,.5))}
-.contact .kicker{justify-content:center;color:var(--gold2)}.contact .kicker::before{display:none}
-.contact h2{max-width:14ch;margin:0 auto 1.25rem;font-size:clamp(3rem,9vw,8rem);color:#efe9df}
-.contact h2 em{color:var(--gold2)}
-.contact p{max-width:30rem;margin:0 auto 2.5rem;color:#d3cdc2}
-.contact .btn{color:var(--gold2);border-color:var(--gold)}
-.contact .btn:hover{background:var(--gold);color:#0b0b0c}
+.contact .si{background:#050506;text-align:center;align-items:center;isolation:isolate;color:#fff}
+.contact .vbg video{filter:brightness(.42)}
+.contact .si::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(5,5,6,.35),rgba(5,5,6,.55))}
+.contact h2{margin:0 auto 1rem;font-size:clamp(3rem,9vw,8rem)}
+.contact p{max-width:30rem;margin:0 auto 2rem;color:#e0e0dc;font-size:1.2rem}
+.contact .cta{justify-content:center}
+.contact .btn{background:#fff;color:#000;border-color:#fff}.contact .btn:hover{background:var(--acc);border-color:var(--acc);color:#fff}
+.contact .btn.ghost{background:transparent;color:#fff}.contact .btn.ghost:hover{background:#fff;color:#000}
+.contact .links{margin-top:2rem;display:flex;gap:1.5rem;justify-content:center;font-size:1rem}
+.contact .links a{text-decoration:none;border-bottom:1px solid rgba(255,255,255,.4)}
 
-footer{background:var(--page);padding:clamp(3.5rem,8vh,5.5rem) 0 2rem}
+footer{background:var(--page);padding:clamp(3rem,7vh,4.5rem) 0 2rem}
 .fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:2.5rem}
-.fgrid .logo{font-size:1.7rem;line-height:1.3;display:block}
-.fgrid h4{font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);font-weight:400;margin:0 0 1.1rem}
+.fgrid .logo{font-size:1.5rem;line-height:1.2;display:block}
+.fgrid h4{font-family:var(--head);font-size:.9rem;font-weight:600;color:var(--muted);margin:0 0 1rem}
 .fgrid ul{list-style:none;margin:0;padding:0}.fgrid li{margin-bottom:.5rem}
-.fgrid a{text-decoration:none;color:#b9b3a8;transition:color .3s}.fgrid a:hover{color:var(--ink)}
-.copy{margin-top:3.5rem;padding-top:1.5rem;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-size:.8rem;color:var(--muted);letter-spacing:.08em}
+.fgrid a{text-decoration:none;color:#d6d6d2;transition:color .25s}.fgrid a:hover{color:var(--acc)}
+.copy{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-size:.9rem;color:var(--muted)}
 
-.js .reveal{opacity:0;transform:translateY(40px);transition:opacity 1.1s ease var(--d,0ms),transform 1.2s cubic-bezier(.16,.8,.2,1) var(--d,0ms)}
+.js .reveal{opacity:0;transform:translateY(36px);transition:opacity .9s ease var(--d,0ms),transform 1s cubic-bezier(.16,.8,.2,1) var(--d,0ms)}
 .js .reveal.in{opacity:1;transform:none}
 
-/* phones / portrait screens: keep media landscape instead of cropping it */
 @media (max-width:860px),(max-aspect-ratio:1/1){
   .grid,.about .grid{grid-template-columns:1fr}
-  .m video,.m img{object-fit:contain}
-  .text{padding:6rem 0 3rem}
+  .car{height:auto;aspect-ratio:16/9}
+  .cs video,.cs img{object-fit:contain}
+  .cb{width:2.6rem;height:2.6rem;font-size:1.6rem}
+  .dots{bottom:3.4rem}
+  .igrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ri .ph{height:clamp(90px,14vh,150px)}
   .fgrid{grid-template-columns:1fr 1fr}
-  .cue{display:none}
-  .ri{flex-basis:80vw}
-  .logo{font-size:1.1rem;letter-spacing:.16em}
+  .logo{font-size:1.05rem}
+  .pill{padding:.5rem .9rem;font-size:.85rem}
+  .photo{max-width:260px}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .grain,.cue i,.soonbox{animation:none}
   .line>span{animation:none;transform:none}
   .fade{animation:none;opacity:1}
   .js .reveal{opacity:1;transform:none;transition:none}
+  .track{transition:none}
 }
 </style>
 </head>
 <body>
-<div class="grain" aria-hidden="true"></div>
 <div id="bar" aria-hidden="true"></div>
 
 <header class="hdr" id="hdr">
   <div class="wrap">
     <a class="logo" href="#top">Collin Verbanatz</a>
-    <button class="menu-btn" id="mbtn" aria-expanded="false" aria-controls="menu"><span>Menu</span><i></i></button>
+    <div class="hbtns">
+      <a class="pill" href="Collin_Verbanatz_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+      <button class="pill solid" id="mbtn" aria-expanded="false" aria-controls="menu"><span>Menu</span><i></i></button>
     </div>
-    </header>
+  </div>
+</header>
 <nav id="menu" aria-label="Main">
   <ol>
-    <li><a href="#p1">Selected work</a></li>
-    <li><a href="#index">Index</a></li>
+    <li><a href="#reel">Demo reel</a></li>
+    <li><a href="#projects">Projects</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#contact">Contact</a></li>
+    <li><a href="Collin_Verbanatz_Resume.pdf" target="_blank" rel="noopener">Resume</a></li>
   </ol>
-  <div class="mfoot"><a href="https://github.com/collinverbanatz" target="_blank" rel="noopener">GitHub</a><a
-      href="https://www.youtube.com/watch?v=eBq3QsrdcZ8" target="_blank" rel="noopener">Demo reel</a><a
-      href="mailto:collinverbanatz@gmail.com">collinverbanatz@gmail.com</a></div>
+  <div class="mfoot"><a href="https://github.com/collinverbanatz" target="_blank" rel="noopener">GitHub</a><a href="https://www.youtube.com/watch?v=eBq3QsrdcZ8" target="_blank" rel="noopener">YouTube</a><a href="mailto:collinverbanatz@gmail.com">collinverbanatz@gmail.com</a></div>
 </nav>
 
 <main id="top">
   <section class="slide hero" data-fx>
     <div class="si">
-      <div class="hero-bg" id="hbg"><video autoplay muted loop playsinline preload="auto" poster="media/mimic.jpg"
-          aria-hidden="true" class="bgvid">
-          <source src="media/mimic.mp4" type="video/mp4">
-        </video></div>
+      <div class="vbg" id="hbg"><video class="mv" autoplay muted loop playsinline preload="auto" poster="media/face-rig.jpg" aria-hidden="true"><source src="media/face-rig.mp4" type="video/mp4"></video></div>
       <div class="wrap hero-in" id="hin">
-        <p class="eyebrow fade" style="animation-delay:.2s">Character Technical Director</p>
-        <h1 class="name"><span class="line"><span style="animation-delay:.25s">Collin</span></span><span
-            class="line l2"><span style="animation-delay:.42s">Verbanatz</span></span></h1>
-        <div class="hero-foot">
-          <p class="tagline fade" style="animation-delay:1s">Rigs that animators enjoy using.</p>
-          <a class="cue fade" href="#statement" style="animation-delay:1.3s"><i></i>Scroll</a>
-        </div>
-      </div>
-      </div>
-  </section>
-
-  <section class="slide statement" id="statement" data-fx>
-    <div class="si tone-light">
-      <div class="wrap">
-        <p class="kicker reveal">The beginning</p>
-        <h2 class="reveal" style="--d:80ms">Built for the people who <em>animate</em> them.</h2>
-        <p class="reveal" style="--d:160ms">I build production-ready character rigs and the Python tools that make rigging
-          faster, from stylized film characters to vehicles, creatures, and real-time game characters.</p>
-        <p class="reveal" style="--d:240ms;margin-top:2.5rem"><a class="btn"
-            href="https://www.youtube.com/watch?v=eBq3QsrdcZ8" target="_blank" rel="noopener">Watch the demo reel</a></p>
+        <p class="eyebrow fade" style="animation-delay:.15s">Character Technical Director</p>
+        <h1 class="name"><span class="line"><span style="animation-delay:.2s">Collin</span></span><span class="line"><span style="animation-delay:.35s">Verbanatz</span></span></h1>
+        <p class="sub fade" style="animation-delay:.8s">I rig characters, props and vehicles for animated films and games, and write the Python tools that speed rigging up.</p>
+        <div class="cta fade" style="animation-delay:1s"><a class="pill solid" href="#reel">Watch my reel</a><a class="pill" href="Collin_Verbanatz_Resume.pdf" target="_blank" rel="noopener">Resume</a></div>
       </div>
     </div>
   </section>
 
-  <section class="slide" id="index" data-fx>
+  <section class="slide reel" id="reel" data-fx>
+    <div class="si">
+      <span class="rl">Demo reel</span>
+      <iframe id="yt" title="Collin Verbanatz demo reel" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" data-src="https://www.youtube.com/embed/eBq3QsrdcZ8?autoplay=1&mute=1&loop=1&playlist=eBq3QsrdcZ8&playsinline=1&rel=0&modestbranding=1&enablejsapi=1"></iframe>
+    </div>
+  </section>
+
+  <section class="slide index" id="projects" data-fx>
     <div class="si tone-dark">
-      <div class="wrap rail-head reveal">
-        <div>
-          <p class="kicker">Index</p>
-          <h2>The <em>work</em></h2>
-          </div>
-        <div class="arrows"><button id="prev" aria-label="Previous">←</button><button id="next" aria-label="Next">→</button>
+      <div class="wrap">
+        <h2 class="reveal">Projects</h2>
+        <div class="igrid reveal" style="--d:100ms">
+<a class="ri" href="#p1"><div class="ph"><img src="media/thumb-sam.jpg" alt="" loading="lazy"></div><strong>Sam Wichman</strong><em>Sandwich Kwon Do</em></a>
+<a class="ri" href="#p2"><div class="ph"><img src="media/thumb-car.jpg" alt="" loading="lazy"></div><strong>mGear Car Rig</strong><em>Sandwich Kwon Do</em></a>
+<a class="ri" href="#p3"><div class="ph empty"><small>Coming soon</small></div><strong>Thiago</strong><em>Lantern of Souls</em></a>
+<a class="ri" href="#p4"><div class="ph"><img src="media/thumb-rigger.jpg" alt="" loading="lazy"></div><strong>Custom Auto Rigger</strong><em>Tool</em></a>
+<a class="ri" href="#p5"><div class="ph"><img src="media/thumb-pan.jpg" alt="" loading="lazy"></div><strong>Pan Mimic</strong><em>Creature rig</em></a>
+<a class="ri" href="#p6"><div class="ph"><img src="media/thumb-phil.jpg" alt="" loading="lazy"></div><strong>Phil Tenderfoot</strong><em>Real-time character</em></a>
+<a class="ri" href="#p7"><div class="ph"><img src="media/thumb-samurai.jpg" alt="" loading="lazy"></div><strong>Samurai Character</strong><em>Character modeling</em></a>
+<a class="ri" href="#p8"><div class="ph"><img src="media/thumb-western.jpg" alt="" loading="lazy"></div><strong>Western Still Life</strong><em>Prop modeling</em></a>
+<a class="ri" href="#p9"><div class="ph empty"><small>Coming soon</small></div><strong>Tree Rig</strong><em>Honey Business</em></a>
         </div>
-        </div>
-        <div class="rail" id="rail">
-          <a class="ri" href="#p1">
-            <div class="ph"><img src="media/cody-anim.jpg" alt="" loading="lazy"></div><strong>Sam Wichman</strong><em>Sandwich
-              Kwon Do</em>
-          </a>
-          <a class="ri" href="#p2">
-            <div class="ph"><img src="media/env-shot.jpg" alt="" loading="lazy"></div><strong>mGear Car Rig</strong><em>Sandwich
-              Kwon Do</em>
-          </a>
-          <a class="ri" href="#p3">
-            <div class="ph empty"><small>Coming soon</small></div><strong>Thiago</strong><em>Lantern of Souls</em>
-          </a>
-          <a class="ri" href="#p4">
-            <div class="ph"><img src="media/special-problems.jpg" alt="" loading="lazy"></div><strong>Custom Auto
-              Rigger</strong><em>Tool</em>
-          </a>
-          <a class="ri" href="#p5">
-            <div class="ph"><img src="media/mimic.jpg" alt="" loading="lazy"></div><strong>Pan Mimic</strong><em>Creature
-              rig</em>
-          </a>
-          <a class="ri" href="#p6">
-            <div class="ph"><img src="media/character-rig.jpg" alt="" loading="lazy"></div><strong>Phil
-              Tenderfoot</strong><em>Real-time character</em>
-          </a>
-          <a class="ri" href="#p7">
-            <div class="ph"><img src="media/sculpt-face.jpg" alt="" loading="lazy"></div><strong>Samurai
-              Character</strong><em>Character modeling</em>
-          </a>
-          <a class="ri" href="#p8">
-            <div class="ph"><img src="media/props-still.jpg" alt="" loading="lazy"></div><strong>Western Still
-              Life</strong><em>Prop modeling</em>
-          </a>
-          <a class="ri" href="#p9">
-            <div class="ph empty"><small>Coming soon</small></div><strong>Big Red Rig</strong><em>Honey Business</em>
-          </a>
-        </div>
-        </div>
-        </section>
+      </div>
+    </div>
+  </section>
 
   <section class="slide proj" id="p1" data-fx data-tall>
     <div class="si text tone-light">
       <div class="wrap grid">
-        <div class="l reveal"><span class="tag">Sandwich Kwon Do<i></i>BYU short film</span>
-          <h3>Sam Wichman</h3>
-        </div>
-        <div class="r reveal" style="--d:120ms">
-          <p>Full character rig created for BYU Center for Animation’s short film Sandwich Kwon Do. Built using NXT as the
-            main rigging framework, with mGear used to generate the character’s body rig. Worked closely with modelers and
-            animators as part of a large production team to develop and refine the rig for the film. The stylized rig
-            supports features including duplicate limbs for smear frames and custom deformation setups for animation.</p>
-          <ul class="meta">
-            <li class="role">Rigging Technical Director</li>
-            <li>Maya</li>
-            <li>NXT</li>
-            <li>mGear</li>
-          </ul>
-        </div>
+        <div class="l reveal"><span class="tag">Sandwich Kwon Do<i></i>BYU short film</span><h3>Sam Wichman</h3></div>
+        <div class="r reveal" style="--d:120ms"><p>Full character rig created for BYU Center for Animation’s short film Sandwich Kwon Do. Built using NXT as the main rigging framework, with mGear used to generate the character’s body rig. Worked closely with modelers and animators as part of a large production team to develop and refine the rig for the film. The stylized rig supports features including duplicate limbs for smear frames and custom deformation setups for animation.</p><ul class="meta"><li class="role">Rigging Technical Director</li><li>Maya</li><li>NXT</li><li>mGear</li></ul></div>
       </div>
-      <div class="wrap works">
-        <figure class="reveal">
-          <div class="m"><video class="mv" controls playsinline muted preload="metadata" poster="media/cody-anim.jpg" loop
-              data-auto="1" aria-label="Sam Wichman: Animation test">
-              <source src="media/cody-anim.mp4" type="video/mp4">
-            </video></div>
-          <figcaption>Animation test</figcaption>
-        </figure>
-        <figure class="reveal">
-          <div class="m"><video class="mv" controls playsinline muted preload="metadata" poster="media/face-rig.jpg" loop
-              data-auto="1" aria-label="Sam Wichman: Facial rig">
-              <source src="media/face-rig.mp4" type="video/mp4">
-            </video></div>
-          <figcaption>Facial rig</figcaption>
-        </figure>
-      </div>
+      <div class="car" data-car tabindex="0" aria-roledescription="carousel" aria-label="Sam Wichman media"><div class="track"><div class="cs"><video class="mv" controls playsinline muted loop preload="metadata" poster="media/cody-anim.jpg" aria-label="Sam Wichman: Animation test"><source src="media/cody-anim.mp4" type="video/mp4"></video><span class="ccap">Animation test</span></div><div class="cs"><video class="mv" controls playsinline muted loop preload="metadata" poster="media/face-rig.jpg" aria-label="Sam Wichman: Facial rig"><source src="media/face-rig.mp4" type="video/mp4"></video><span class="ccap">Facial rig</span></div></div><button type="button" class="cb prev" aria-label="Previous">&#8249;</button><button type="button" class="cb next" aria-label="Next">&#8250;</button><div class="dots" role="group" aria-label="Choose item"><button type="button" aria-label="Show item 1 of 2" class="on">1</button><button type="button" aria-label="Show item 2 of 2">2</button></div></div>
     </div>
   </section>
   <section class="slide proj" id="p2" data-fx data-tall>
     <div class="si text tone-dark">
       <div class="wrap grid">
-        <div class="l reveal"><span class="tag">Sandwich Kwon Do<i></i>BYU short film</span>
-          <h3>mGear Car Rig</h3>
-        </div>
-        <div class="r reveal" style="--d:120ms">
-          <p>Auto rigged car using the mGear code base by creating custom components for both the body and wheels.
-            Features include automatic wheel rotation based on wheel radius, tire deflation, suspension, pivot rolls,
-            steer control, and full body squash and stretch. This rig was used in a BYU Center for Animation short film.
-          </p>
-          <ul class="meta">
-            <li class="role">Rigging Technical Director</li>
-            <li>Maya</li>
-            <li>mGear</li>
-            <li>Python</li>
-          </ul>
-        </div>
+        <div class="l reveal"><span class="tag">Sandwich Kwon Do<i></i>BYU short film</span><h3>mGear Car Rig</h3></div>
+        <div class="r reveal" style="--d:120ms"><p>Auto rigged car using the mGear code base by creating custom components for both the body and wheels. Features include automatic wheel rotation based on wheel radius, tire deflation, suspension, pivot rolls, steer control, and full body squash and stretch. This rig was used in a BYU Center for Animation short film.</p><ul class="meta"><li class="role">Rigging Technical Director</li><li>Maya</li><li>mGear</li><li>Python</li></ul></div>
       </div>
-      <div class="wrap works">
-        <figure class="reveal">
-          <div class="m"><video class="mv" controls playsinline muted preload="metadata" poster="media/vehicle-rig.jpg"
-              loop aria-label="mGear Car Rig: Rig demo">
-              <source src="media/vehicle-rig.mp4" type="video/mp4">
-            </video></div>
-          <figcaption>Rig demo</figcaption>
-        </figure>
-        <figure class="reveal">
-          <div class="m"><video class="mv" controls playsinline muted preload="metadata" poster="media/env-shot.jpg" loop
-              data-auto="1" aria-label="mGear Car Rig: Film shot">
-              <source src="media/env-shot.mp4" type="video/mp4">
-            </video></div>
-          <figcaption>Film shot</figcaption>
-        </figure>
-      </div>
+      <div class="car" data-car tabindex="0" aria-roledescription="carousel" aria-label="mGear Car Rig media"><div class="track"><div class="cs"><video class="mv" controls playsinline muted loop preload="metadata" poster="media/vehicle-rig.jpg" aria-label="mGear Car Rig: Rig demo"><source src="media/vehicle-rig.mp4" type="video/mp4"></video><span class="ccap">Rig demo</span></div><div class="cs"><video class="mv" controls playsinline muted loop preload="metadata" poster="media/env-shot.jpg" aria-label="mGear Car Rig: Film shot"><source src="media/env-shot.mp4" type="video/mp4"></video><span class="ccap">Film shot</span></div></div><button type="button" class="cb prev" aria-label="Previous">&#8249;</button><button type="button" class="cb next" aria-label="Next">&#8250;</button><div class="dots" role="group" aria-label="Choose item"><button type="button" aria-label="Show item 1 of 2" class="on">1</button><button type="button" aria-label="Show item 2 of 2">2</button></div></div>
     </div>
   </section>
   <section class="slide proj" id="p3" data-fx data-tall>
     <div class="si text tone-light">
       <div class="wrap grid">
-        <div class="l reveal"><span class="tag">Lantern of Souls<i></i>BYU video game</span>
-          <h3>Thiago</h3>
-        </div>
-        <div class="r reveal" style="--d:120ms">
-          <p>Game-ready rigging solutions focused on animator usability and performance, including skinning, deformation,
-            and character setup workflows, built alongside artists and programmers.</p>
-          <ul class="meta">
-            <li class="role">Rigging Lead</li>
-            <li>Maya</li>
-            <li>Unreal Engine</li>
-          </ul>
-        </div>
+        <div class="l reveal"><span class="tag">Lantern of Souls<i></i>BYU video game</span><h3>Thiago</h3></div>
+        <div class="r reveal" style="--d:120ms"><p>Game-ready rigging solutions focused on animator usability and performance, including skinning, deformation, and character setup workflows, built alongside artists and programmers.</p><ul class="meta"><li class="role">Rigging Lead</li><li>Maya</li><li>Unreal Engine</li></ul></div>
       </div>
-      <div class="wrap works">
-        <figure class="reveal">
-          <div class="m soonbox"><span>Video coming soon</span></div>
-        </figure>
-      </div>
+      <div class="wrap works"><div class="m soonbox"><span>Video coming soon</span></div></div>
     </div>
   </section>
   <section class="slide proj" id="p4" data-fx data-tall>
     <div class="si text tone-dark">
       <div class="wrap grid">
-        <div class="l reveal"><span class="tag">Tool<i></i>Auto rigging</span>
-          <h3>Custom Auto Rigger</h3>
-        </div>
-        <div class="r reveal" style="--d:120ms">
-          <p>Auto rigger based on guide placement. Features include FK/IK switching, IK with pole vector, twisty joints,
-            stretching, bendy joints, and the ability to retarget to mocap. It can build multiple characters and creates
-            controls for each joint.</p>
-          <ul class="meta">
-            <li>Maya</li>
-            <li>Python</li>
-          </ul>
-        </div>
+        <div class="l reveal"><span class="tag">Tool<i></i>Auto rigging</span><h3>Custom Auto Rigger</h3></div>
+        <div class="r reveal" style="--d:120ms"><p>Auto rigger based on guide placement. Features include FK/IK switching, IK with pole vector, twisty joints, stretching, bendy joints, and the ability to retarget to mocap. It can build multiple characters and creates controls for each joint.</p><ul class="meta"><li>Maya</li><li>Python</li></ul></div>
       </div>
-      <div class="wrap works">
-        <figure class="reveal">
-          <div class="m"><video class="mv" controls playsinline muted preload="metadata"
-              poster="media/special-problems.jpg" loop aria-label="Custom Auto Rigger: Rig demo">
-              <source src="media/special-problems.mp4" type="video/mp4">
-            </video></div>
-          <figcaption>Rig demo</figcaption>
-        </figure>
-      </div>
+      <div class="car" data-car tabindex="0" aria-roledescription="carousel" aria-label="Custom Auto Rigger media"><div class="track"><div class="cs"><video class="mv" controls playsinline muted loop preload="metadata" poster="media/special-problems.jpg" aria-label="Custom Auto Rigger: Rig demo"><source src="media/special-problems.mp4" type="video/mp4"></video><span class="ccap">Rig demo</span></div></div></div>
     </div>
   </section>
   <section class="slide proj" id="p5" data-fx data-tall>
     <div class="si text tone-light">
       <div class="wrap grid">
-        <div class="l reveal"><span class="tag">Creature rig<i></i>Maya</span>
-          <h3>Pan Mimic</h3>
-        </div>
-        <div class="r reveal" style="--d:120ms">
-          <p>Modeled, textured, rigged, and animated in Maya and Substance Painter. Features a procedural creature rig
-            using IK/FK switching, set-driven keys, spline IK, and ribbon deformers. Includes a rig breakdown
-            demonstrating control behavior and deformation.</p>
-          <ul class="meta">
-            <li>Maya</li>
-            <li>Substance Painter</li>
-          </ul>
-        </div>
+        <div class="l reveal"><span class="tag">Creature rig<i></i>Maya</span><h3>Pan Mimic</h3></div>
+        <div class="r reveal" style="--d:120ms"><p>Modeled, textured, rigged, and animated in Maya and Substance Painter. Features a procedural creature rig using IK/FK switching, set-driven keys, spline IK, and ribbon deformers. Includes a rig breakdown demonstrating control behavior and deformation.</p><ul class="meta"><li>Maya</li><li>Substance Painter</li></ul></div>
       </div>
-      <div class="wrap works">
-        <figure class="reveal">
-          <div class="m"><video class="mv" controls playsinline muted preload="metadata" poster="media/mimic.jpg" loop
-              data-auto="1" aria-label="Pan Mimic: Animation and rig breakdown">
-              <source src="media/mimic.mp4" type="video/mp4">
-            </video></div>
-          <figcaption>Animation and rig breakdown</figcaption>
-        </figure>
-      </div>
+      <div class="car" data-car tabindex="0" aria-roledescription="carousel" aria-label="Pan Mimic media"><div class="track"><div class="cs"><video class="mv" controls playsinline muted loop preload="metadata" poster="media/mimic.jpg" aria-label="Pan Mimic: Animation and rig breakdown"><source src="media/mimic.mp4" type="video/mp4"></video><span class="ccap">Animation and rig breakdown</span></div></div></div>
     </div>
   </section>
   <section class="slide proj" id="p6" data-fx data-tall>
     <div class="si text tone-dark">
       <div class="wrap grid">
-        <div class="l reveal"><span class="tag">Real-time character<i></i>Unreal Engine course</span>
-          <h3>Phil Tenderfoot</h3>
-        </div>
-        <div class="r reveal" style="--d:120ms">
-          <p>Real-time character created for an Unreal Engine course. Base mesh derived from MetaHuman and refined in
-            ZBrush. All clothing and accessories modeled by hand. Rig built using Hive auto-rig with custom joint
-            corrections for Unreal compatibility. Animated using motion-capture data. Character was used by multiple
-            classmates in Unreal Engine games and cinematic projects.</p>
-          <ul class="meta">
-            <li>Unreal Engine</li>
-            <li>ZBrush</li>
-            <li>Hive</li>
-          </ul>
-        </div>
+        <div class="l reveal"><span class="tag">Real-time character<i></i>Unreal Engine course</span><h3>Phil Tenderfoot</h3></div>
+        <div class="r reveal" style="--d:120ms"><p>Real-time character created for an Unreal Engine course. Base mesh derived from MetaHuman and refined in ZBrush. All clothing and accessories modeled by hand. Rig built using Hive auto-rig with custom joint corrections for Unreal compatibility. Animated using motion-capture data. Character was used by multiple classmates in Unreal Engine games and cinematic projects.</p><ul class="meta"><li>Unreal Engine</li><li>ZBrush</li><li>Hive</li></ul></div>
       </div>
-      <div class="wrap works">
-        <figure class="reveal">
-          <div class="m"><video class="mv" controls playsinline muted preload="metadata" poster="media/character-rig.jpg"
-              loop aria-label="Phil Tenderfoot: Rig demo">
-              <source src="media/character-rig.mp4" type="video/mp4">
-            </video></div>
-          <figcaption>Rig demo</figcaption>
-        </figure>
-      </div>
+      <div class="car" data-car tabindex="0" aria-roledescription="carousel" aria-label="Phil Tenderfoot media"><div class="track"><div class="cs"><video class="mv" controls playsinline muted loop preload="metadata" poster="media/character-rig.jpg" aria-label="Phil Tenderfoot: Rig demo"><source src="media/character-rig.mp4" type="video/mp4"></video><span class="ccap">Rig demo</span></div></div></div>
     </div>
   </section>
   <section class="slide proj" id="p7" data-fx data-tall>
     <div class="si text tone-light">
       <div class="wrap grid">
-        <div class="l reveal"><span class="tag">Character modeling<i></i>ZBrush</span>
-          <h3>Samurai Character</h3>
-        </div>
-        <div class="r reveal" style="--d:120ms">
-          <p>Realistic character modeled in ZBrush and Maya with a focus on anatomy and deformation-ready topology.
-            Retopologized in Maya using Quad Draw. Assets shown at multiple production stages, including final mesh,
-            clothing, and facial and hand details.</p>
-          <ul class="meta">
-            <li>ZBrush</li>
-            <li>Maya</li>
-            <li>Quad Draw</li>
-          </ul>
-        </div>
+        <div class="l reveal"><span class="tag">Character modeling<i></i>ZBrush</span><h3>Samurai Character</h3></div>
+        <div class="r reveal" style="--d:120ms"><p>Realistic character modeled in ZBrush and Maya with a focus on anatomy and deformation-ready topology. Retopologized in Maya using Quad Draw. Assets shown at multiple production stages, including final mesh, clothing, and facial and hand details.</p><ul class="meta"><li>ZBrush</li><li>Maya</li><li>Quad Draw</li></ul></div>
       </div>
-      <div class="wrap works">
-        <figure class="reveal">
-          <div class="m"><video class="mv" controls playsinline muted preload="metadata" poster="media/hair-groom.jpg"
-              loop data-auto="1" aria-label="Samurai Character: Hair groom">
-              <source src="media/hair-groom.mp4" type="video/mp4">
-            </video></div>
-          <figcaption>Hair groom</figcaption>
-        </figure>
-        <figure class="reveal">
-          <div class="m fit"><img src="media/sculpt-face.jpg" alt="Samurai Character: Face sculpt" loading="lazy"></div>
-          <figcaption>Face sculpt</figcaption>
-        </figure>
-        <figure class="reveal">
-          <div class="m fit"><img src="media/sculpt-hands.jpg" alt="Samurai Character: Hand sculpt" loading="lazy"></div>
-          <figcaption>Hand sculpt</figcaption>
-        </figure>
-      </div>
+      <div class="car" data-car tabindex="0" aria-roledescription="carousel" aria-label="Samurai Character media"><div class="track"><div class="cs"><video class="mv" controls playsinline muted loop preload="metadata" poster="media/hair-groom.jpg" aria-label="Samurai Character: Hair groom"><source src="media/hair-groom.mp4" type="video/mp4"></video><span class="ccap">Hair groom</span></div><div class="cs fit"><img src="media/sculpt-face.jpg" alt="Samurai Character: Face sculpt" loading="lazy"><span class="ccap">Face sculpt</span></div><div class="cs fit"><img src="media/sculpt-hands.jpg" alt="Samurai Character: Hand sculpt" loading="lazy"><span class="ccap">Hand sculpt</span></div></div><button type="button" class="cb prev" aria-label="Previous">&#8249;</button><button type="button" class="cb next" aria-label="Next">&#8250;</button><div class="dots" role="group" aria-label="Choose item"><button type="button" aria-label="Show item 1 of 3" class="on">1</button><button type="button" aria-label="Show item 2 of 3">2</button><button type="button" aria-label="Show item 3 of 3">3</button></div></div>
     </div>
   </section>
   <section class="slide proj" id="p8" data-fx data-tall>
     <div class="si text tone-dark">
       <div class="wrap grid">
-        <div class="l reveal"><span class="tag">Prop modeling<i></i>Hard surface</span>
-          <h3>Western Still Life</h3>
-        </div>
-        <div class="r reveal" style="--d:120ms">
-          <p>Hard-surface modeling and texturing project inspired by “Rocky Raccoon” by The Beatles. Focus on detailed
-            prop modeling and material work.</p>
-          <ul class="meta">
-            <li>Hard-surface modeling</li>
-            <li>Texturing</li>
-          </ul>
-        </div>
+        <div class="l reveal"><span class="tag">Prop modeling<i></i>Hard surface</span><h3>Western Still Life</h3></div>
+        <div class="r reveal" style="--d:120ms"><p>Hard-surface modeling and texturing project inspired by “Rocky Raccoon” by The Beatles. Focus on detailed prop modeling and material work.</p><ul class="meta"><li>Hard-surface modeling</li><li>Texturing</li></ul></div>
       </div>
-      <div class="wrap works">
-        <figure class="reveal">
-          <div class="m"><img src="media/props-still.jpg" alt="Western Still Life: Final render" loading="lazy"></div>
-          <figcaption>Final render</figcaption>
-        </figure>
-      </div>
+      <div class="car" data-car tabindex="0" aria-roledescription="carousel" aria-label="Western Still Life media"><div class="track"><div class="cs"><img src="media/props-still.jpg" alt="Western Still Life: Final render" loading="lazy"><span class="ccap">Final render</span></div></div></div>
     </div>
   </section>
   <section class="slide proj" id="p9" data-fx data-tall>
     <div class="si text tone-light">
       <div class="wrap grid">
-        <div class="l reveal"><span class="tag">Honey Business<i></i>BYU short film</span>
-          <h3>Big Red Rig</h3>
-        </div>
-        <div class="r reveal" style="--d:120ms">
-          <p>Tree character rig created for BYU Center for Animation’s short film Honey Business. Rigged in Maya with
-            custom controls for bending and stretching the tree’s branches and limbs. The rig was designed to give the
-            animator flexible controls for creating exaggerated poses and animation.</p>
-          <ul class="meta">
-            <li class="role">Rigging Artist</li>
-            <li>Maya</li>
-          </ul>
-        </div>
+        <div class="l reveal"><span class="tag">Honey Business<i></i>BYU short film</span><h3>Tree Rig</h3></div>
+        <div class="r reveal" style="--d:120ms"><p>Tree character rig created for BYU Center for Animation’s short film Honey Business. Rigged in Maya with custom controls for bending and stretching the tree’s branches and limbs. The rig was designed to give the animator flexible controls for creating exaggerated poses and animation.</p><ul class="meta"><li class="role">Rigging Artist</li><li>Maya</li></ul></div>
       </div>
-      <div class="wrap works">
-        <figure class="reveal">
-          <div class="m soonbox"><span>Video coming soon</span></div>
-        </figure>
-      </div>
+      <div class="wrap works"><div class="m soonbox"><span>Video coming soon</span></div></div>
     </div>
   </section>
 
@@ -559,45 +333,27 @@ footer{background:var(--page);padding:clamp(3.5rem,8vh,5.5rem) 0 2rem}
     <div class="si tone-dark">
       <div class="wrap grid">
         <div class="reveal">
-          <p class="kicker">About</p>
-          <h2>The person behind <em>the rigs</em></h2>
+          <div class="photo"><span>CV</span><img src="media/collin.jpg" alt="Collin Verbanatz" onerror="this.remove()"></div>
         </div>
         <div class="reveal" style="--d:100ms">
-          <p>I’m a Computer Science student at BYU (Animation &amp; Games emphasis, graduating April 2027) working as a
-            character TD on student films and games.</p>
-          <p>Before that I produced 12+ short 3D animations for BYU Information Systems and designed a mascot game for
-            students to play during football games. I’m looking to contribute to character rigging and technical art
-            pipelines for animated projects.</p>
-          <ul class="skills">
-            <li>Maya</li>
-            <li>mGear</li>
-            <li>Unreal Engine</li>
-            <li>Python</li>
-            <li>C++</li>
-            <li>C</li>
-            <li>Java</li>
-            <li>Linux</li>
-            <li>Cinema 4D</li>
-            <li>ZBrush</li>
-            <li>Substance Painter</li>
-            <li>Photoshop</li>
-            <li>After Effects</li>
-            <li>English</li>
-            <li>Spanish</li>
-          </ul>
+          <h2 style="margin-top:0">About me</h2>
+          <p>I’m a Computer Science student at BYU (Animation &amp; Games emphasis, graduating April 2027) working as a character TD on student films and games.</p>
+          <p>Before that I produced 12+ short 3D animations for BYU Information Systems and designed a mascot game for students to play during football games. I’m looking to contribute to character rigging and technical art pipelines for animated projects.</p>
+          <ul class="skills"><li>Maya</li><li>mGear</li><li>Unreal Engine</li><li>Python</li><li>C++</li><li>C</li><li>Java</li><li>Linux</li><li>Cinema 4D</li><li>ZBrush</li><li>Substance Painter</li><li>Photoshop</li><li>After Effects</li><li>English</li><li>Spanish</li></ul>
+          <a class="btn" href="Collin_Verbanatz_Resume.pdf" target="_blank" rel="noopener">Open my resume</a>
         </div>
-        </div>
+      </div>
     </div>
   </section>
 
   <section class="slide contact" id="contact" data-fx>
     <div class="si tone-dark">
-      <div class="bg" id="cbg"><img src="media/props-still.jpg" alt="" loading="lazy"></div>
+      <div class="vbg" id="cbg"><video class="mv" muted loop playsinline preload="metadata" poster="media/mimic.jpg" aria-hidden="true"><source src="media/mimic.mp4" type="video/mp4"></video></div>
       <div class="wrap">
-        <p class="kicker reveal">Contact</p>
-        <h2 class="reveal" style="--d:80ms">Let’s build something <em>together</em></h2>
-        <p class="reveal" style="--d:160ms">Open to character rigging and technical art roles.</p>
-        <a class="btn reveal" style="--d:240ms" href="mailto:collinverbanatz@gmail.com">collinverbanatz@gmail.com</a>
+        <h2 class="reveal">Contact</h2>
+        <p class="reveal" style="--d:80ms">I’m open to character rigging and technical art roles. Send me an email or take a look at my resume.</p>
+        <div class="cta reveal" style="--d:160ms"><a class="btn" href="mailto:collinverbanatz@gmail.com">collinverbanatz@gmail.com</a><a class="btn ghost" href="Collin_Verbanatz_Resume.pdf" target="_blank" rel="noopener">Resume</a></div>
+        <div class="links reveal" style="--d:240ms"><a href="https://github.com/collinverbanatz" target="_blank" rel="noopener">GitHub</a><a href="https://www.youtube.com/watch?v=eBq3QsrdcZ8" target="_blank" rel="noopener">YouTube</a></div>
       </div>
     </div>
   </section>
@@ -607,112 +363,133 @@ footer{background:var(--page);padding:clamp(3.5rem,8vh,5.5rem) 0 2rem}
   <div class="wrap">
     <div class="fgrid">
       <div><a class="logo" href="#top">Collin<br>Verbanatz</a></div>
-      <div>
-        <h4>Menu</h4>
-        <ul>
-          <li><a href="#p1">Selected work</a></li>
-          <li><a href="#index">Index</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Elsewhere</h4>
-        <ul>
-          <li><a href="https://github.com/collinverbanatz" target="_blank" rel="noopener">GitHub</a></li>
-          <li><a href="https://www.youtube.com/watch?v=eBq3QsrdcZ8" target="_blank" rel="noopener">Demo reel</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Get in touch</h4>
-        <ul>
-          <li><a href="mailto:collinverbanatz@gmail.com">collinverbanatz@gmail.com</a></li>
-        </ul>
-      </div>
+      <div><h4>Menu</h4><ul><li><a href="#reel">Demo reel</a></li><li><a href="#projects">Projects</a></li><li><a href="#about">About</a></li><li><a href="#contact">Contact</a></li></ul></div>
+      <div><h4>Links</h4><ul><li><a href="Collin_Verbanatz_Resume.pdf" target="_blank" rel="noopener">Resume</a></li><li><a href="https://github.com/collinverbanatz" target="_blank" rel="noopener">GitHub</a></li><li><a href="https://www.youtube.com/watch?v=eBq3QsrdcZ8" target="_blank" rel="noopener">YouTube</a></li></ul></div>
+      <div><h4>Email</h4><ul><li><a href="mailto:collinverbanatz@gmail.com">collinverbanatz@gmail.com</a></li></ul></div>
     </div>
     <div class="copy"><span>© 2026 Collin Verbanatz</span><span>Character Technical Director</span></div>
   </div>
-    </footer>
+</footer>
 
 <script>
 (function(){
-  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var doc = document, root = doc.documentElement;
-  var bar = doc.getElementById('bar'), hdr = doc.getElementById('hdr');
-  var hbg = doc.getElementById('hbg'), hin = doc.getElementById('hin'), cbg = doc.getElementById('cbg');
-  if (reduce) { var hv = doc.querySelector('.bgvid'); if (hv) { hv.removeAttribute('autoplay'); hv.pause() } }
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var doc=document,root=doc.documentElement;
+  var bar=doc.getElementById('bar'),hdr=doc.getElementById('hdr');
+  var hbg=doc.getElementById('hbg'),hin=doc.getElementById('hin'),cbg=doc.getElementById('cbg');
 
   /* menu */
-  var mbtn = doc.getElementById('mbtn'), menu = doc.getElementById('menu');
-  function setMenu(o) { root.classList.toggle('menu-open', o); mbtn.setAttribute('aria-expanded', o); doc.body.style.overflow = o ? 'hidden' : '' }
-  mbtn.addEventListener('click', function () { setMenu(!root.classList.contains('menu-open')) });
-  menu.addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(false) });
-  doc.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false) });
+  var mbtn=doc.getElementById('mbtn'),menu=doc.getElementById('menu');
+  function setMenu(o){root.classList.toggle('menu-open',o);mbtn.setAttribute('aria-expanded',o);doc.body.style.overflow=o?'hidden':''}
+  mbtn.addEventListener('click',function(){setMenu(!root.classList.contains('menu-open'))});
+  menu.addEventListener('click',function(e){if(e.target.closest('a'))setMenu(false)});
+  doc.addEventListener('keydown',function(e){if(e.key==='Escape')setMenu(false)});
 
-  /* reveal text */
-  var rv = [].slice.call(doc.querySelectorAll('.reveal'));
-  if ('IntersectionObserver' in window) {
-    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target) } }) }, { threshold: .15 });
-    rv.forEach(function (el) { io.observe(el) });
-  } else rv.forEach(function (el) { el.classList.add('in') });
+  /* reveal */
+  var rv=[].slice.call(doc.querySelectorAll('.reveal'));
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15});
+    rv.forEach(function(el){io.observe(el)});
+  }else rv.forEach(function(el){el.classList.add('in')});
 
-  /* scale each section: 75% when it is a screen away, 100% when it fills the screen (both directions) */
-  var fx = [].slice.call(doc.querySelectorAll('.slide[data-fx]')).map(function (s) { return { s: s, si: s.firstElementChild, cur: null, tall: s.hasAttribute('data-tall') } });
-  function target(s) {
-    var r = s.getBoundingClientRect(), vh = innerHeight;
-    if (r.bottom < -vh * .2 || r.top > vh * 1.2) return .75;
-    var tin = Math.max(0, Math.min(1, r.top / vh)), tout = Math.max(0, Math.min(1, (vh - r.bottom) / vh));
-    var d = Math.max(tin, tout); d = d * d * (3 - 2 * d);
-    return 1 - .25 * d;
+  /* sections scale from 75% to 100% as they reach the screen (and back when leaving) */
+  var fx=[].slice.call(doc.querySelectorAll('.slide[data-fx]')).map(function(s){return{s:s,si:s.firstElementChild,cur:null,tall:s.hasAttribute('data-tall')}});
+  function target(s){
+    var r=s.getBoundingClientRect(),vh=innerHeight;
+    if(r.bottom<-vh*.2||r.top>vh*1.2)return .75;
+    var tin=Math.max(0,Math.min(1,r.top/vh)),tout=Math.max(0,Math.min(1,(vh-r.bottom)/vh));
+    var d=Math.max(tin,tout);d=d*d*(3-2*d);
+    return 1-.25*d;
   }
-  var busy = false;
-  function frame(snap) {
-    var y = pageYOffset, vh = innerHeight, max = root.scrollHeight - vh;
-    bar.style.transform = 'scaleX(' + (max > 0 ? Math.min(1, y / max) : 0) + ')';
-    hdr.classList.toggle('solid', y > vh * .6);
-    busy = false;
-    if (!reduce) {
-      if (y < vh * 1.2) { hbg.style.transform = 'translate3d(0,' + (y * .25) + 'px,0)'; hin.style.transform = 'translate3d(0,' + (-y * .12) + 'px,0)'; hin.style.opacity = Math.max(0, 1 - y / (vh * .7)) }
-      fx.forEach(function (o) {
-        var t = target(o.s);
-        o.cur = (o.cur === null || snap) ? t : o.cur + (t - o.cur) * .2;
-        if (Math.abs(t - o.cur) > .0006) busy = true; else o.cur = t;
-        if (o.tall) { var rr = o.s.getBoundingClientRect(); o.si.style.transformOrigin = (rr.top > 0 && rr.top > vh - rr.bottom) ? '50% 0%' : (rr.bottom < vh ? '50% 100%' : o.si.style.transformOrigin || '50% 0%') }
-        o.si.style.transform = o.cur >= .9995 ? '' : 'scale(' + o.cur.toFixed(4) + ')';
-        o.si.style.borderRadius = ((1 - o.cur) * 4 * 26).toFixed(1) + 'px';
+  var busy=false;
+  function frame(snap){
+    var y=pageYOffset,vh=innerHeight,max=root.scrollHeight-vh;
+    bar.style.transform='scaleX('+(max>0?Math.min(1,y/max):0)+')';
+    hdr.classList.toggle('solid',y>vh*.6);
+    busy=false;
+    if(!reduce){
+      if(y<vh*1.2){hbg.style.transform='translate3d(0,'+(y*.25)+'px,0)';hin.style.transform='translate3d(0,'+(-y*.12)+'px,0)';hin.style.opacity=Math.max(0,1-y/(vh*.75))}
+      fx.forEach(function(o){
+        var t=target(o.s);
+        o.cur=(o.cur===null||snap)?t:o.cur+(t-o.cur)*.22;
+        if(Math.abs(t-o.cur)>.0006)busy=true;else o.cur=t;
+        if(o.tall){var rr=o.s.getBoundingClientRect();o.si.style.transformOrigin=(rr.top>0&&rr.top>vh-rr.bottom)?'50% 0%':(rr.bottom<vh?'50% 100%':o.si.style.transformOrigin||'50% 0%')}
+        o.si.style.transform=o.cur>=.9995?'':'scale('+o.cur.toFixed(4)+')';
+        o.si.style.borderRadius=((1-o.cur)*4*26).toFixed(1)+'px';
       });
-      var cr = cbg.parentNode.getBoundingClientRect();
-      if (cr.bottom > 0 && cr.top < vh) cbg.style.transform = 'translate3d(0,' + ((cr.top + cr.height / 2 - vh / 2) * -.1) + 'px,0)';
+      var cr=cbg.parentNode.getBoundingClientRect();
+      if(cr.bottom>0&&cr.top<vh)cbg.style.transform='translate3d(0,'+((cr.top+cr.height/2-vh/2)*-.1)+'px,0)';
     }
-    if (busy) requestAnimationFrame(function () { frame(false) });
+    if(busy)requestAnimationFrame(function(){frame(false)});
   }
-  var queued = false;
-  function kick() { if (!queued) { queued = true; requestAnimationFrame(function () { queued = false; frame(false) }) } }
-  addEventListener('scroll', kick, { passive: true });
-  addEventListener('resize', function () { frame(true) });
-  addEventListener('load', function () { frame(true) });
-  if (doc.fonts && doc.fonts.ready) doc.fonts.ready.then(function () { frame(true) });
+  var queued=false;
+  function kick(){if(!queued){queued=true;requestAnimationFrame(function(){queued=false;frame(false)})}}
+  addEventListener('scroll',kick,{passive:true});
+  addEventListener('resize',function(){frame(true)});
+  addEventListener('load',function(){frame(true)});
+  if(doc.fonts&&doc.fonts.ready)doc.fonts.ready.then(function(){frame(true)});
   frame(true);
 
-  /* index rail */
-  var rail = doc.getElementById('rail');
-  function step(d) { rail.scrollBy({ left: d * rail.querySelector('.ri').offsetWidth * 1.1, behavior: 'smooth' }) }
-  doc.getElementById('prev').addEventListener('click', function () { step(-1) });
-  doc.getElementById('next').addEventListener('click', function () { step(1) });
-
-  /* videos: loops play (muted) while on screen, everything pauses when you leave; one at a time */
-  var vids = [].slice.call(doc.querySelectorAll('video.mv'));
-  doc.addEventListener('play', function (e) { vids.forEach(function (v) { if (v !== e.target) v.pause() }) }, true);
-  if ('IntersectionObserver' in window) {
-    var vio = new IntersectionObserver(function (es) {
-      es.forEach(function (e) {
-        var v = e.target;
-        if (e.isIntersecting) { if (v.dataset.auto && !reduce) { var p = v.play(); if (p && p.catch) p.catch(function () { }) } }
-        else v.pause();
-      })
-    }, { threshold: .6 });
-    vids.forEach(function (v) { vio.observe(v) });
+  /* faster scrolling with the mouse wheel / trackpad */
+  if(!reduce&&matchMedia('(pointer:fine)').matches){
+    var tgt=pageYOffset,cur=pageYOffset,run=false,MULT=2.4;
+    function maxY(){return root.scrollHeight-innerHeight}
+    function loop(){
+      cur+=(tgt-cur)*.14;
+      if(Math.abs(tgt-cur)<.5){cur=tgt;run=false}
+      scrollTo({top:cur,behavior:'instant'});
+      if(run)requestAnimationFrame(loop);
+    }
+    addEventListener('wheel',function(e){
+      if(e.ctrlKey||root.classList.contains('menu-open'))return;
+      e.preventDefault();
+      if(!run)tgt=cur=pageYOffset;
+      var d=e.deltaMode===1?e.deltaY*32:e.deltaY;
+      tgt=Math.max(0,Math.min(maxY(),tgt+d*MULT));
+      if(!run){run=true;requestAnimationFrame(loop)}
+    },{passive:false});
+    addEventListener('scroll',function(){if(!run){tgt=cur=pageYOffset}},{passive:true});
   }
+
+  /* carousels: arrows, numbers, swipe, keyboard */
+  [].forEach.call(doc.querySelectorAll('[data-car]'),function(c){
+    var track=c.querySelector('.track'),n=c.querySelectorAll('.cs').length,i=0,dots=c.querySelectorAll('.dots button');
+    function go(k){
+      i=(k+n)%n;track.style.transform='translateX('+(-i*100)+'%)';
+      [].forEach.call(dots,function(d,j){d.classList.toggle('on',j===i);d.setAttribute('aria-current',j===i?'true':'false')});
+    }
+    var pv=c.querySelector('.prev'),nx=c.querySelector('.next');
+    if(pv)pv.addEventListener('click',function(){go(i-1)});
+    if(nx)nx.addEventListener('click',function(){go(i+1)});
+    [].forEach.call(dots,function(d,j){d.addEventListener('click',function(){go(j)})});
+    c.addEventListener('keydown',function(e){if(n<2)return;if(e.key==='ArrowLeft')go(i-1);else if(e.key==='ArrowRight')go(i+1)});
+    var sx=null;
+    c.addEventListener('touchstart',function(e){sx=e.touches[0].clientX},{passive:true});
+    c.addEventListener('touchend',function(e){if(sx===null||n<2)return;var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50)go(i+(dx<0?1:-1));sx=null},{passive:true});
+  });
+
+  /* every video on screen plays; anything off screen pauses */
+  var vids=[].slice.call(doc.querySelectorAll('video.mv'));
+  if(reduce){vids.forEach(function(v){v.removeAttribute('autoplay');v.pause()})}
+  else if('IntersectionObserver' in window){
+    var vio=new IntersectionObserver(function(es){es.forEach(function(e){
+      var v=e.target;
+      if(e.isIntersecting){var p=v.play();if(p&&p.catch)p.catch(function(){})}else v.pause();
+    })},{threshold:.5});
+    vids.forEach(function(v){vio.observe(v)});
+  }
+
+  /* YouTube reel: loads and plays when it fills the screen, pauses when you leave */
+  var yt=doc.getElementById('yt'),ytOn=false;
+  function ytCmd(f){try{yt.contentWindow.postMessage(JSON.stringify({event:'command',func:f,args:[]}),'*')}catch(_){}}
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){es.forEach(function(e){
+      if(e.isIntersecting){
+        if(!yt.getAttribute('src')){yt.src=yt.dataset.src}
+        else if(!reduce)ytCmd('playVideo');
+      }else if(yt.getAttribute('src'))ytCmd('pauseVideo');
+    })},{threshold:.4}).observe(yt.parentNode);
+  }else yt.src=yt.dataset.src;
 })();
 </script>
 </body>
