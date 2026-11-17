@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Collin Verbanatz – Character Technical Director</title>
 <meta name="description" content="Collin Verbanatz, character technical director. Rigs, tools and character work for animated films and games.">
-<meta name="theme-color" content="#050506">
+<meta name="theme-color" content="#ffffff">
 <script>document.documentElement.classList.add('js')</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --page:#050506; --ink:#f2f2ef; --muted:#9a9a97; --line:rgba(255,255,255,.14); --acc:#78896a;
+  --page:#ffffff; --ink:#f2f2ef; --muted:#9a9a97; --line:rgba(255,255,255,.14); --acc:#78896a;
   --head:"Space Grotesk","Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
   --sans:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
   color-scheme:dark;
@@ -27,7 +27,7 @@ img,video{max-width:100%}
 #bar{position:fixed;left:0;top:0;height:3px;width:100%;background:var(--acc);transform:scaleX(0);transform-origin:0 50%;z-index:120}
 
 .tone-dark{--s-bg:#101012;--s-ink:#f2f2ef;--s-muted:#a3a3a0;--s-line:rgba(255,255,255,.18);--s-acc:#a7b894;--s-chip:rgba(255,255,255,.07)}
-.tone-light{--s-bg:#f4f4f1;--s-ink:#111113;--s-muted:#5d5d59;--s-line:rgba(0,0,0,.16);--s-acc:#5d6c50;--s-chip:rgba(0,0,0,.05)}
+.tone-light{--s-bg:#ffffff;--s-ink:#111113;--s-muted:#5d5d59;--s-line:rgba(0,0,0,.16);--s-acc:#5d6c50;--s-chip:rgba(0,0,0,.05)}
 
 
 /* left sidebar: always visible */
@@ -56,6 +56,9 @@ main,footer{margin-left:var(--side)}
 .soc a{text-decoration:none}.soc a:hover{color:#fff;text-decoration:underline}
 @media (min-width:861px){.hdr,#menu{display:none}}
 @media (max-width:860px){.side{display:none}main,footer{margin-left:0}}
+
+/* white boxes on a white page: a faint edge keeps them visible */
+.si.tone-light{box-shadow:0 0 0 1px rgba(0,0,0,.09),0 24px 60px -32px rgba(0,0,0,.28)}
 
 /* header (phones only) */
 .hdr{position:fixed;inset:0 0 auto 0;z-index:100;padding-top:env(safe-area-inset-top,0px);transition:background .4s,border-color .4s;border-bottom:1px solid transparent}
@@ -136,7 +139,7 @@ h2{font-family:var(--head);font-weight:700;font-size:clamp(2.4rem,6vw,5rem);line
 /* full-screen carousel */
 .car iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
 .car iframe:not([src]){visibility:hidden}
-.car{position:relative;height:100vh;height:100svh;background:#000;overflow:hidden;outline-offset:-4px}
+.car{position:relative;height:80vh;height:80svh;background:#000;overflow:hidden;outline-offset:-4px}
 .track{display:flex;height:100%;transition:transform .8s cubic-bezier(.7,0,.2,1)}
 .cs{position:relative;flex:0 0 100%;height:100%;background:#000}
 .cs video,.cs img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;background:#000}
@@ -176,13 +179,14 @@ h2{font-family:var(--head);font-weight:700;font-size:clamp(2.4rem,6vw,5rem);line
 .contact .links{margin-top:2rem;display:flex;gap:1.5rem;justify-content:center;font-size:1rem}
 .contact .links a{text-decoration:none;border-bottom:1px solid rgba(255,255,255,.4)}
 
-footer{background:var(--page);padding:clamp(3rem,7vh,4.5rem) 0 2rem}
+footer{background:var(--page);color:#15151a;padding:clamp(3rem,7vh,4.5rem) 0 2rem}
+footer .logo{color:#15151a}
 .fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:2.5rem}
 .fgrid .logo{font-size:1.5rem;line-height:1.2;display:block}
-.fgrid h4{font-family:var(--head);font-size:.9rem;font-weight:600;color:var(--muted);margin:0 0 1rem}
+.fgrid h4{font-family:var(--head);font-size:.9rem;font-weight:600;color:#6d6858;margin:0 0 1rem}
 .fgrid ul{list-style:none;margin:0;padding:0}.fgrid li{margin-bottom:.5rem}
-.fgrid a{text-decoration:none;color:#d6d6d2;transition:color .25s}.fgrid a:hover{color:var(--acc)}
-.copy{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-size:.9rem;color:var(--muted)}
+.fgrid a{text-decoration:none;color:#2b2b28;transition:color .25s}.fgrid a:hover{color:#5d6c50}
+.copy{margin-top:3rem;padding-top:1.5rem;border-top:1px solid rgba(21,21,26,.18);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-size:.9rem;color:#6d6858}
 
 .js .reveal{opacity:0;transform:translateY(36px);transition:opacity .9s ease var(--d,0ms),transform 1s cubic-bezier(.16,.8,.2,1) var(--d,0ms)}
 .js .reveal.in{opacity:1;transform:none}
