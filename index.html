@@ -136,19 +136,21 @@ h2{font-family:var(--head);font-weight:700;font-size:clamp(2.4rem,6vw,5rem);line
 .meta li{padding:.3rem .85rem;border-radius:999px;background:var(--s-chip);font-size:.85rem;font-weight:500}
 .meta .role{background:#5d6c50;color:#fff}
 
-/* full-screen carousel */
-.car iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
-.car iframe:not([src]){visibility:hidden}
-.car{position:relative;height:80vh;height:80svh;background:#000;overflow:hidden;outline-offset:-4px}
+/* media: 80% of the width, full video visible (no cropping) */
+.car{position:relative;width:100%;padding:0 0 clamp(2rem,5vh,3.5rem);outline-offset:-4px}
+.stagewrap{position:relative;width:100%}
+.stage{position:relative;width:80%;margin:0 auto;aspect-ratio:16/9;overflow:hidden;border-radius:14px;background:#000;box-shadow:0 30px 70px -34px rgba(0,0,0,.55)}
+.stage iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
+.stage iframe:not([src]){visibility:hidden}
 .track{display:flex;height:100%;transition:transform .8s cubic-bezier(.7,0,.2,1)}
 .cs{position:relative;flex:0 0 100%;height:100%;background:#000}
-.cs video,.cs img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;background:#000}
-.cs.fit,.cs.fit img{background:#303030;object-fit:contain}
-.ccap{position:absolute;left:clamp(1.25rem,4vw,3.5rem);top:1.25rem;z-index:2;font-family:var(--head);font-weight:500;font-size:.95rem;color:#fff;padding:.35rem .9rem;border-radius:999px;background:rgba(0,0,0,.5);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);pointer-events:none}
-.cb{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:3.4rem;height:3.4rem;border-radius:50%;border:2px solid rgba(255,255,255,.85);background:rgba(0,0,0,.45);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:#fff;font-size:2rem;line-height:1;padding:0 0 .25rem;cursor:pointer;transition:background .25s,color .25s}
-.cb:hover{background:#fff;color:#000}
-.cb.prev{left:clamp(.75rem,2vw,2rem)}.cb.next{right:clamp(.75rem,2vw,2rem)}
-.dots{position:absolute;left:50%;bottom:4.6rem;transform:translateX(-50%);z-index:3;display:flex;gap:.5rem;padding:.4rem;border-radius:999px;background:rgba(0,0,0,.5);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.cs video,.cs img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;background:#000}
+.cs.fit,.cs.fit img{background:#303030}
+.ccap{position:absolute;left:1rem;top:1rem;z-index:2;font-family:var(--head);font-weight:500;font-size:.95rem;color:#fff;padding:.35rem .9rem;border-radius:999px;background:rgba(0,0,0,.55);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);pointer-events:none}
+.cb{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:3.4rem;height:3.4rem;border-radius:50%;border:2px solid var(--s-ink);background:transparent;color:var(--s-ink);font-size:2rem;line-height:1;padding:0 0 .25rem;cursor:pointer;transition:background .25s,color .25s}
+.cb:hover{background:var(--s-ink);color:var(--s-bg)}
+.cb.prev{left:calc(5% - 1.7rem)}.cb.next{right:calc(5% - 1.7rem)}
+.dots{display:flex;gap:.5rem;width:max-content;margin:1.1rem auto 0;padding:.4rem;border-radius:999px;background:rgba(0,0,0,.6)}
 .dots button{width:2.1rem;height:2.1rem;border-radius:50%;border:0;background:transparent;color:#fff;font-family:var(--head);font-weight:600;font-size:.9rem;cursor:pointer;transition:background .25s,color .25s}
 .dots button.on{background:#fff;color:#000}
 .dots button:not(.on):hover{background:rgba(255,255,255,.25)}
@@ -193,10 +195,9 @@ footer .logo{color:#15151a}
 
 @media (max-width:860px),(max-aspect-ratio:1/1){
   .grid,.about .grid{grid-template-columns:1fr}
-  .car{height:auto;aspect-ratio:16/9}
-  .cs video,.cs img{object-fit:contain}
-  .cb{width:2.6rem;height:2.6rem;font-size:1.6rem}
-  .dots{bottom:3.4rem}
+  .stage{width:100%;border-radius:0}
+  .cb{width:2.6rem;height:2.6rem;font-size:1.6rem;background:rgba(0,0,0,.45);border-color:#fff;color:#fff}
+  .cb.prev{left:.5rem}.cb.next{right:.5rem}
   .igrid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .ri .ph{height:clamp(90px,14vh,150px)}
   .fgrid{grid-template-columns:1fr 1fr}
@@ -284,9 +285,7 @@ footer .logo{color:#15151a}
         <div class="l reveal"><span class="tag">Highlights<i></i>Rigging and animation</span><h3>Demo Reel</h3></div>
         <div class="r reveal" style="--d:120ms"><p>A short look at my recent rigging work.</p><a class="btn" href="https://www.youtube.com/watch?v=eBq3QsrdcZ8" target="_blank" rel="noopener">Watch on YouTube</a></div>
       </div>
-      <div class="car">
-        <iframe id="yt" title="Collin Verbanatz demo reel" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" data-src="https://www.youtube.com/embed/eBq3QsrdcZ8?autoplay=1&mute=1&loop=1&playlist=eBq3QsrdcZ8&playsinline=1&rel=0&modestbranding=1&enablejsapi=1"></iframe>
-      </div>
+      <div class="car"><div class="stagewrap"><div class="stage"><iframe id="yt" title="Collin Verbanatz demo reel" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" data-src="https://www.youtube.com/embed/eBq3QsrdcZ8?autoplay=1&mute=1&loop=1&playlist=eBq3QsrdcZ8&playsinline=1&rel=0&modestbranding=1&enablejsapi=1"></iframe></div></div></div>
     </div>
   </section>
 
@@ -315,7 +314,7 @@ footer .logo{color:#15151a}
         <div class="l reveal"><span class="tag">Sandwich Kwon Do<i></i>BYU short film</span><h3>Sam Wichman</h3></div>
         <div class="r reveal" style="--d:120ms"><p>Full character rig created for BYU Center for Animation’s short film Sandwich Kwon Do. Built using NXT as the main rigging framework, with mGear used to generate the character’s body rig. Worked closely with modelers and animators as part of a large production team to develop and refine the rig for the film. The stylized rig supports features including duplicate limbs for smear frames and custom deformation setups for animation.</p><ul class="meta"><li class="role">Rigging Technical Director</li><li>Maya</li><li>NXT</li><li>mGear</li></ul></div>
       </div>
-      <div class="car" data-car tabindex="0" aria-roledescription="carousel" aria-label="Sam Wichman media"><div class="track"><div class="cs"><video class="mv" controls playsinline muted loop preload="metadata" poster="media/a250.jpg" aria-label="Sam Wichman: Shot A_250"><source src="media/a250.mp4" type="video/mp4"></video><span class="ccap">Shot A_250</span></div><div class="cs"><video class="mv" controls playsinline muted loop preload="metadata" poster="media/cody-anim.jpg" aria-label="Sam Wichman: Animation test"><source src="media/cody-anim.mp4" type="video/mp4"></video><span class="ccap">Animation test</span></div><div class="cs"><video class="mv" controls playsinline muted loop preload="metadata" poster="media/z-screening.jpg" aria-label="Sam Wichman: Screening fight"><source src="media/z-screening.mp4" type="video/mp4"></video><span class="ccap">Screening fight</span></div><div class="cs"><video class="mv" controls playsinline muted loop preload="metadata" poster="media/face-rig.jpg" aria-label="Sam Wichman: Facial rig"><source src="media/face-rig.mp4" type="video/mp4"></video><span class="ccap">Facial rig</span></div></div><button type="button" class="cb prev" aria-label="Previous">&#8249;</button><button type="button" class="cb next" aria-label="Next">&#8250;</button><div class="dots" role="group" aria-label="Choose item"><button type="button" aria-label="Show item 1 of 4" class="on">1</button><button type="button" aria-label="Show item 2 of 4">2</button><button type="button" aria-label="Show item 3 of 4">3</button><button type="button" aria-label="Show item 4 of 4">4</button></div></div>
+      <div class="car" data-car tabindex="0" aria-roledescription="carousel" aria-label="Sam Wichman media"><div class="stagewrap"><div class="stage"><div class="track"><div class="cs"><video class="mv" controls playsinline muted loop preload="metadata" poster="media/a250.jpg" aria-label="Sam Wichman: Shot A_250"><source src="media/a250.mp4" type="video/mp4"></video><span class="ccap">Shot A_250</span></div><div class="cs"><video class="mv" controls playsinline muted loop preload="metadata" poster="media/cody-anim.jpg" aria-label="Sam Wichman: Animation test"><source src="media/cody-anim.mp4" type="video/mp4"></video><span class="ccap">Animation test</span></div><div class="cs"><video class="mv" controls playsinline muted loop preload="metadata" poster="media/z-screening.jpg" aria-label="Sam Wichman: Screening fight"><source src="media/z-screening.mp4" type="video/mp4"></video><span class="ccap">Screening fight</span></div><div class="cs"><video class="mv" controls playsinline muted loop preload="metadata" poster="media/face-rig.jpg" aria-label="Sam Wichman: Facial rig"><source src="media/face-rig.mp4" type="video/mp4"></video><span class="ccap">Facial rig</span></div></div></div><button type="button" class="cb prev" aria-label="Previous">&#8249;</button><button type="button" class="cb next" aria-label="Next">&#8250;</button></div><div class="dots" role="group" aria-label="Choose item"><button type="button" aria-label="Show item 1 of 4" class="on">1</button><button type="button" aria-label="Show item 2 of 4">2</button><button type="button" aria-label="Show item 3 of 4">3</button><button type="button" aria-label="Show item 4 of 4">4</button></div></div>
     </div>
   </section>
   <section class="slide proj" id="p2" data-fx data-tall>
@@ -324,7 +323,7 @@ footer .logo{color:#15151a}
         <div class="l reveal"><span class="tag">Sandwich Kwon Do<i></i>BYU short film</span><h3>mGear Car Rig</h3></div>
         <div class="r reveal" style="--d:120ms"><p>Auto rigged car using the mGear code base by creating custom components for both the body and wheels. Features include automatic wheel rotation based on wheel radius, tire deflation, suspension, pivot rolls, steer control, and full body squash and stretch. This rig was used in a BYU Center for Animation short film.</p><ul class="meta"><li class="role">Rigging Technical Director</li><li>Maya</li><li>mGear</li><li>Python</li></ul></div>
       </div>
-      <div class="car" data-car tabindex="0" aria-roledescription="carousel" aria-label="mGear Car Rig media"><div class="track"><div class="cs"><video class="mv" controls playsinline muted loop preload="metadata" poster="media/vehicle-rig.jpg" aria-label="mGear Car Rig: Rig demo"><source src="media/vehicle-rig.mp4" type="video/mp4"></video><span class="ccap">Rig demo</span></div><div class="cs"><video class="mv" controls playsinline muted loop preload="metadata" poster="media/env-shot.jpg" aria-label="mGear Car Rig: Film shot"><source src="media/env-shot.mp4" type="video/mp4"></video><span class="ccap">Film shot</span></div></div><button type="button" class="cb prev" aria-label="Previous">&#8249;</button><button type="button" class="cb next" aria-label="Next">&#8250;</button><div class="dots" role="group" aria-label="Choose item"><button type="button" aria-label="Show item 1 of 2" class="on">1</button><button type="button" aria-label="Show item 2 of 2">2</button></div></div>
+      <div class="car" data-car tabindex="0" aria-roledescription="carousel" aria-label="mGear Car Rig media"><div class="stagewrap"><div class="stage"><div class="track"><div class="cs"><video class="mv" controls playsinline muted loop preload="metadata" poster="media/vehicle-rig.jpg" aria-label="mGear Car Rig: Rig demo"><source src="media/vehicle-rig.mp4" type="video/mp4"></video><span class="ccap">Rig demo</span></div><div class="cs"><video class="mv" controls playsinline muted loop preload="metadata" poster="media/env-shot.jpg" aria-label="mGear Car Rig: Film shot"><source src="media/env-shot.mp4" type="video/mp4"></video><span class="ccap">Film shot</span></div></div></div><button type="button" class="cb prev" aria-label="Previous">&#8249;</button><button type="button" class="cb next" aria-label="Next">&#8250;</button></div><div class="dots" role="group" aria-label="Choose item"><button type="button" aria-label="Show item 1 of 2" class="on">1</button><button type="button" aria-label="Show item 2 of 2">2</button></div></div>
     </div>
   </section>
   <section class="slide proj" id="p3" data-fx data-tall>
@@ -342,7 +341,7 @@ footer .logo{color:#15151a}
         <div class="l reveal"><span class="tag">Tool<i></i>Auto rigging</span><h3>Custom Auto Rigger</h3></div>
         <div class="r reveal" style="--d:120ms"><p>Auto rigger based on guide placement. Features include FK/IK switching, IK with pole vector, twisty joints, stretching, bendy joints, and the ability to retarget to mocap. It can build multiple characters and creates controls for each joint.</p><ul class="meta"><li>Maya</li><li>Python</li></ul></div>
       </div>
-      <div class="car" data-car tabindex="0" aria-roledescription="carousel" aria-label="Custom Auto Rigger media"><div class="track"><div class="cs"><video class="mv" controls playsinline muted loop preload="metadata" poster="media/special-problems.jpg" aria-label="Custom Auto Rigger: Rig demo"><source src="media/special-problems.mp4" type="video/mp4"></video><span class="ccap">Rig demo</span></div></div></div>
+      <div class="car" data-car tabindex="0" aria-roledescription="carousel" aria-label="Custom Auto Rigger media"><div class="stagewrap"><div class="stage"><div class="track"><div class="cs"><video class="mv" controls playsinline muted loop preload="metadata" poster="media/special-problems.jpg" aria-label="Custom Auto Rigger: Rig demo"><source src="media/special-problems.mp4" type="video/mp4"></video><span class="ccap">Rig demo</span></div></div></div></div></div>
     </div>
   </section>
   <section class="slide proj" id="p5" data-fx data-tall>
@@ -351,7 +350,7 @@ footer .logo{color:#15151a}
         <div class="l reveal"><span class="tag">Creature rig<i></i>Maya</span><h3>Pan Mimic</h3></div>
         <div class="r reveal" style="--d:120ms"><p>Modeled, textured, rigged, and animated in Maya and Substance Painter. Features a procedural creature rig using IK/FK switching, set-driven keys, spline IK, and ribbon deformers. Includes a rig breakdown demonstrating control behavior and deformation.</p><ul class="meta"><li>Maya</li><li>Substance Painter</li></ul></div>
       </div>
-      <div class="car" data-car tabindex="0" aria-roledescription="carousel" aria-label="Pan Mimic media"><div class="track"><div class="cs"><video class="mv" controls playsinline muted loop preload="metadata" poster="media/mimic.jpg" aria-label="Pan Mimic: Animation and rig breakdown"><source src="media/mimic.mp4" type="video/mp4"></video><span class="ccap">Animation and rig breakdown</span></div></div></div>
+      <div class="car" data-car tabindex="0" aria-roledescription="carousel" aria-label="Pan Mimic media"><div class="stagewrap"><div class="stage"><div class="track"><div class="cs"><video class="mv" controls playsinline muted loop preload="metadata" poster="media/mimic.jpg" aria-label="Pan Mimic: Animation and rig breakdown"><source src="media/mimic.mp4" type="video/mp4"></video><span class="ccap">Animation and rig breakdown</span></div></div></div></div></div>
     </div>
   </section>
   <section class="slide proj" id="p6" data-fx data-tall>
@@ -360,7 +359,7 @@ footer .logo{color:#15151a}
         <div class="l reveal"><span class="tag">Real-time character<i></i>Unreal Engine course</span><h3>Phil Tenderfoot</h3></div>
         <div class="r reveal" style="--d:120ms"><p>Real-time character created for an Unreal Engine course. Base mesh derived from MetaHuman and refined in ZBrush. All clothing and accessories modeled by hand. Rig built using Hive auto-rig with custom joint corrections for Unreal compatibility. Animated using motion-capture data. Character was used by multiple classmates in Unreal Engine games and cinematic projects.</p><ul class="meta"><li>Unreal Engine</li><li>ZBrush</li><li>Hive</li></ul></div>
       </div>
-      <div class="car" data-car tabindex="0" aria-roledescription="carousel" aria-label="Phil Tenderfoot media"><div class="track"><div class="cs"><video class="mv" controls playsinline muted loop preload="metadata" poster="media/character-rig.jpg" aria-label="Phil Tenderfoot: Rig demo"><source src="media/character-rig.mp4" type="video/mp4"></video><span class="ccap">Rig demo</span></div></div></div>
+      <div class="car" data-car tabindex="0" aria-roledescription="carousel" aria-label="Phil Tenderfoot media"><div class="stagewrap"><div class="stage"><div class="track"><div class="cs"><video class="mv" controls playsinline muted loop preload="metadata" poster="media/character-rig.jpg" aria-label="Phil Tenderfoot: Rig demo"><source src="media/character-rig.mp4" type="video/mp4"></video><span class="ccap">Rig demo</span></div></div></div></div></div>
     </div>
   </section>
   <section class="slide proj" id="p7" data-fx data-tall>
@@ -369,7 +368,7 @@ footer .logo{color:#15151a}
         <div class="l reveal"><span class="tag">Character modeling<i></i>ZBrush</span><h3>Samurai Character</h3></div>
         <div class="r reveal" style="--d:120ms"><p>Realistic character modeled in ZBrush and Maya with a focus on anatomy and deformation-ready topology. Retopologized in Maya using Quad Draw. Assets shown at multiple production stages, including final mesh, clothing, and facial and hand details.</p><ul class="meta"><li>ZBrush</li><li>Maya</li><li>Quad Draw</li></ul></div>
       </div>
-      <div class="car" data-car tabindex="0" aria-roledescription="carousel" aria-label="Samurai Character media"><div class="track"><div class="cs"><video class="mv" controls playsinline muted loop preload="metadata" poster="media/hair-groom.jpg" aria-label="Samurai Character: Hair groom"><source src="media/hair-groom.mp4" type="video/mp4"></video><span class="ccap">Hair groom</span></div><div class="cs fit"><img src="media/sculpt-face.jpg" alt="Samurai Character: Face sculpt" loading="lazy"><span class="ccap">Face sculpt</span></div><div class="cs fit"><img src="media/sculpt-hands.jpg" alt="Samurai Character: Hand sculpt" loading="lazy"><span class="ccap">Hand sculpt</span></div></div><button type="button" class="cb prev" aria-label="Previous">&#8249;</button><button type="button" class="cb next" aria-label="Next">&#8250;</button><div class="dots" role="group" aria-label="Choose item"><button type="button" aria-label="Show item 1 of 3" class="on">1</button><button type="button" aria-label="Show item 2 of 3">2</button><button type="button" aria-label="Show item 3 of 3">3</button></div></div>
+      <div class="car" data-car tabindex="0" aria-roledescription="carousel" aria-label="Samurai Character media"><div class="stagewrap"><div class="stage"><div class="track"><div class="cs"><video class="mv" controls playsinline muted loop preload="metadata" poster="media/hair-groom.jpg" aria-label="Samurai Character: Hair groom"><source src="media/hair-groom.mp4" type="video/mp4"></video><span class="ccap">Hair groom</span></div><div class="cs fit"><img src="media/sculpt-face.jpg" alt="Samurai Character: Face sculpt" loading="lazy"><span class="ccap">Face sculpt</span></div><div class="cs fit"><img src="media/sculpt-hands.jpg" alt="Samurai Character: Hand sculpt" loading="lazy"><span class="ccap">Hand sculpt</span></div></div></div><button type="button" class="cb prev" aria-label="Previous">&#8249;</button><button type="button" class="cb next" aria-label="Next">&#8250;</button></div><div class="dots" role="group" aria-label="Choose item"><button type="button" aria-label="Show item 1 of 3" class="on">1</button><button type="button" aria-label="Show item 2 of 3">2</button><button type="button" aria-label="Show item 3 of 3">3</button></div></div>
     </div>
   </section>
   <section class="slide proj" id="p8" data-fx data-tall>
@@ -378,7 +377,7 @@ footer .logo{color:#15151a}
         <div class="l reveal"><span class="tag">Prop modeling<i></i>Hard surface</span><h3>Western Still Life</h3></div>
         <div class="r reveal" style="--d:120ms"><p>Hard-surface modeling and texturing project inspired by “Rocky Raccoon” by The Beatles. Focus on detailed prop modeling and material work.</p><ul class="meta"><li>Hard-surface modeling</li><li>Texturing</li></ul></div>
       </div>
-      <div class="car" data-car tabindex="0" aria-roledescription="carousel" aria-label="Western Still Life media"><div class="track"><div class="cs"><img src="media/props-still.jpg" alt="Western Still Life: Final render" loading="lazy"><span class="ccap">Final render</span></div></div></div>
+      <div class="car" data-car tabindex="0" aria-roledescription="carousel" aria-label="Western Still Life media"><div class="stagewrap"><div class="stage"><div class="track"><div class="cs"><img src="media/props-still.jpg" alt="Western Still Life: Final render" loading="lazy"><span class="ccap">Final render</span></div></div></div></div></div>
     </div>
   </section>
   <section class="slide proj" id="p9" data-fx data-tall>
