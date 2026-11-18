@@ -112,18 +112,18 @@ h2{font-family:var(--head);font-weight:700;font-size:clamp(2.4rem,6vw,5rem);line
 .btn.ghost{background:transparent;color:var(--s-ink)}
 .btn.ghost:hover{background:var(--s-ink);border-color:var(--s-ink);color:var(--s-bg)}
 
-/* index: all projects on one screen */
-.index .si{padding:6rem 0 3rem}
-.index h2{margin:0 0 1.5rem}
-.igrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(.75rem,2vh,1.4rem) clamp(.75rem,1.6vw,1.5rem)}
-.ri{text-decoration:none;display:block}
-.ri .ph{height:clamp(90px,15.5vh,200px);overflow:hidden;background:#1c1c1f;border-radius:10px}
+/* index: the 9 images fill about 80% of the slide */
+.index .si{padding:4.75rem 0 1.5rem;justify-content:flex-start}
+.index h2{margin:0 0 .9rem;font-size:clamp(2rem,3.2vw,2.8rem)}
+.igrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr));height:80vh;height:80svh;gap:clamp(.6rem,1.4vh,1rem) clamp(.6rem,1.2vw,1rem)}
+.ri{position:relative;display:block;min-height:0;text-decoration:none;border-radius:14px;overflow:hidden;background:#1c1c1f}
+.ri::after{content:"";position:absolute;inset:auto 0 0 0;height:55%;background:linear-gradient(transparent,rgba(0,0,0,.78));pointer-events:none}
+.ri .ph{height:100%;overflow:hidden}
 .ri .ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
-.ri:hover .ph img{transform:scale(1.07)}
-.ri .ph.empty{display:grid;place-items:center;background:repeating-linear-gradient(135deg,#17171a 0 12px,#1c1c20 12px 24px)}
-.ri .ph.empty small{font-family:var(--head);font-size:.9rem;color:var(--s-muted)}
-.ri strong{display:block;font-family:var(--head);font-weight:600;font-size:1.1rem;line-height:1.2;margin-top:.55rem;letter-spacing:-.01em}
-.ri em{font-style:normal;font-size:.85rem;color:var(--s-muted)}
+.ri:hover .ph img{transform:scale(1.06)}
+.ri strong,.ri em{position:absolute;left:1.1rem;right:1rem;z-index:2;color:#fff}
+.ri strong{bottom:1.9rem;margin:0;font-family:var(--head);font-weight:600;font-size:clamp(1.05rem,1.5vw,1.4rem);line-height:1.15;letter-spacing:-.01em}
+.ri em{bottom:.75rem;font-style:normal;font-size:.85rem;color:rgba(255,255,255,.82)}
 
 /* projects */
 .text{justify-content:flex-start;padding:7rem 0 0}
@@ -136,11 +136,17 @@ h2{font-family:var(--head);font-weight:700;font-size:clamp(2.4rem,6vw,5rem);line
 .meta li{padding:.3rem .85rem;border-radius:999px;background:var(--s-chip);font-size:.85rem;font-weight:500}
 .meta .role{background:#5d6c50;color:#fff}
 
+/* film logos */
+.plogo{display:block;height:clamp(64px,8vw,120px);width:auto;max-width:100%;margin:0 0 1.4rem}
+
+/* videos are silent: hide the sound controls */
+video::-webkit-media-controls-volume-slider,video::-webkit-media-controls-mute-button,video::-webkit-media-controls-volume-control-container{display:none!important}
+
 /* media: 80% of the width, full video visible (no cropping) */
 .car{position:relative;width:100%;padding:0 0 clamp(2rem,5vh,3.5rem);outline-offset:-4px}
 .stagewrap{position:relative;width:100%}
 .stage{position:relative;width:80%;margin:0 auto;aspect-ratio:16/9;overflow:hidden;border-radius:14px;background:#000;box-shadow:0 30px 70px -34px rgba(0,0,0,.55)}
-.stage iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
+.stage iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000;pointer-events:none}
 .stage iframe:not([src]){visibility:hidden}
 .track{display:flex;height:100%;transition:transform .8s cubic-bezier(.7,0,.2,1)}
 .cs{position:relative;flex:0 0 100%;height:100%;background:#000}
@@ -198,8 +204,8 @@ footer .logo{color:#15151a}
   .stage{width:100%;border-radius:0}
   .cb{width:2.6rem;height:2.6rem;font-size:1.6rem;background:rgba(0,0,0,.45);border-color:#fff;color:#fff}
   .cb.prev{left:.5rem}.cb.next{right:.5rem}
-  .igrid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .ri .ph{height:clamp(90px,14vh,150px)}
+  .igrid{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:none;height:auto}
+  .ri .ph{height:clamp(130px,20vh,190px)}
   .fgrid{grid-template-columns:1fr 1fr}
   .logo{font-size:1.05rem}
   .pill{padding:.5rem .9rem;font-size:.85rem}
@@ -285,7 +291,7 @@ footer .logo{color:#15151a}
         <div class="l reveal"><span class="tag">Highlights<i></i>Rigging and animation</span><h3>Demo Reel</h3></div>
         <div class="r reveal" style="--d:120ms"><p>A short look at my recent rigging work.</p><a class="btn" href="https://www.youtube.com/watch?v=eBq3QsrdcZ8" target="_blank" rel="noopener">Watch on YouTube</a></div>
       </div>
-      <div class="car"><div class="stagewrap"><div class="stage"><iframe id="yt" title="Collin Verbanatz demo reel" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" data-src="https://www.youtube.com/embed/eBq3QsrdcZ8?autoplay=1&mute=1&loop=1&playlist=eBq3QsrdcZ8&playsinline=1&rel=0&modestbranding=1&enablejsapi=1"></iframe></div></div></div>
+      <div class="car"><div class="stagewrap"><div class="stage"><iframe id="yt" title="Collin Verbanatz demo reel" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" data-src="https://www.youtube.com/embed/eBq3QsrdcZ8?autoplay=1&mute=1&loop=1&playlist=eBq3QsrdcZ8&playsinline=1&rel=0&modestbranding=1&controls=0&disablekb=1&fs=0&iv_load_policy=3&enablejsapi=1"></iframe></div></div></div>
     </div>
   </section>
 
@@ -299,8 +305,8 @@ footer .logo{color:#15151a}
 <a class="ri" href="#p3"><div class="ph"><img src="media/thumb-thiago.jpg" alt="" loading="lazy"></div><strong>Thiago</strong><em>Lantern of Souls</em></a>
 <a class="ri" href="#p4"><div class="ph"><img src="media/thumb-rigger.jpg" alt="" loading="lazy"></div><strong>Custom Auto Rigger</strong><em>Tool</em></a>
 <a class="ri" href="#p5"><div class="ph"><img src="media/thumb-pan.jpg" alt="" loading="lazy"></div><strong>Pan Mimic</strong><em>Creature rig</em></a>
-<a class="ri" href="#p6"><div class="ph"><img src="media/thumb-phil.jpg" alt="" loading="lazy"></div><strong>Phil Tenderfoot</strong><em>Real-time character</em></a>
-<a class="ri" href="#p7"><div class="ph"><img src="media/thumb-samurai.jpg" alt="" loading="lazy"></div><strong>Samurai Character</strong><em>Character modeling</em></a>
+<a class="ri" href="#p6"><div class="ph"><img src="media/thumb-phil.jpg" alt="" loading="lazy" style="object-position:50% 30%"></div><strong>Phil Tenderfoot</strong><em>Real-time character</em></a>
+<a class="ri" href="#p7"><div class="ph"><img src="media/thumb-samurai.jpg" alt="" loading="lazy" style="object-position:50% 12%"></div><strong>Samurai Character</strong><em>Character modeling</em></a>
 <a class="ri" href="#p8"><div class="ph"><img src="media/thumb-western.jpg" alt="" loading="lazy"></div><strong>Western Still Life</strong><em>Prop modeling</em></a>
 <a class="ri" href="#p9"><div class="ph"><img src="media/thumb-tree.jpg" alt="" loading="lazy"></div><strong>Tree Rig</strong><em>Honey Business</em></a>
         </div>
@@ -311,7 +317,7 @@ footer .logo{color:#15151a}
   <section class="slide proj" id="p1" data-fx data-tall>
     <div class="si text tone-light">
       <div class="wrap grid">
-        <div class="l reveal"><span class="tag">Sandwich Kwon Do<i></i>BYU short film</span><h3>Sam Wichman</h3></div>
+        <div class="l reveal"><img class="plogo" src="media/logo-skd.png" alt="Sandwich Kwon Do logo" loading="lazy"><span class="tag">Sandwich Kwon Do<i></i>BYU short film</span><h3>Sam Wichman</h3></div>
         <div class="r reveal" style="--d:120ms"><p>Full character rig created for BYU Center for Animation’s short film Sandwich Kwon Do. Built using NXT as the main rigging framework, with mGear used to generate the character’s body rig. Worked closely with modelers and animators as part of a large production team to develop and refine the rig for the film. The stylized rig supports features including duplicate limbs for smear frames and custom deformation setups for animation.</p><ul class="meta"><li class="role">Rigging Technical Director</li><li>Maya</li><li>NXT</li><li>mGear</li></ul></div>
       </div>
       <div class="car" data-car tabindex="0" aria-roledescription="carousel" aria-label="Sam Wichman media"><div class="stagewrap"><div class="stage"><div class="track"><div class="cs"><video class="mv" controls playsinline muted loop preload="metadata" poster="media/a250.jpg" aria-label="Sam Wichman: Shot A_250"><source src="media/a250.mp4" type="video/mp4"></video><span class="ccap">Shot A_250</span></div><div class="cs"><video class="mv" controls playsinline muted loop preload="metadata" poster="media/cody-test-anim.jpg" aria-label="Sam Wichman: Animation test"><source src="media/cody-test-anim.mp4" type="video/mp4"></video><span class="ccap">Animation test</span></div><div class="cs"><video class="mv" controls playsinline muted loop preload="metadata" poster="media/z-screening.jpg" aria-label="Sam Wichman: Screening fight"><source src="media/z-screening.mp4" type="video/mp4"></video><span class="ccap">Screening fight</span></div><div class="cs"><video class="mv" controls playsinline muted loop preload="metadata" poster="media/face-anims.jpg" aria-label="Sam Wichman: Face animations"><source src="media/face-anims.mp4" type="video/mp4"></video><span class="ccap">Face animations</span></div><div class="cs"><video class="mv" controls playsinline muted loop preload="metadata" poster="media/whichman-posing.jpg" aria-label="Sam Wichman: Rig posing"><source src="media/whichman-posing.mp4" type="video/mp4"></video><span class="ccap">Rig posing</span></div></div></div><button type="button" class="cb prev" aria-label="Previous">&#8249;</button><button type="button" class="cb next" aria-label="Next">&#8250;</button></div><div class="dots" role="group" aria-label="Choose item"><button type="button" aria-label="Show item 1 of 5" class="on">1</button><button type="button" aria-label="Show item 2 of 5">2</button><button type="button" aria-label="Show item 3 of 5">3</button><button type="button" aria-label="Show item 4 of 5">4</button><button type="button" aria-label="Show item 5 of 5">5</button></div></div>
@@ -320,10 +326,10 @@ footer .logo{color:#15151a}
   <section class="slide proj" id="p2" data-fx data-tall>
     <div class="si text tone-dark">
       <div class="wrap grid">
-        <div class="l reveal"><span class="tag">Sandwich Kwon Do<i></i>BYU short film</span><h3>mGear Car Rig</h3></div>
+        <div class="l reveal"><img class="plogo" src="media/logo-skd.png" alt="Sandwich Kwon Do logo" loading="lazy"><span class="tag">Sandwich Kwon Do<i></i>BYU short film</span><h3>mGear Car Rig</h3></div>
         <div class="r reveal" style="--d:120ms"><p>Auto rigged car using the mGear code base by creating custom components for both the body and wheels. Features include automatic wheel rotation based on wheel radius, tire deflation, suspension, pivot rolls, steer control, and full body squash and stretch. This rig was used in a BYU Center for Animation short film.</p><ul class="meta"><li class="role">Rigging Technical Director</li><li>Maya</li><li>mGear</li><li>Python</li></ul></div>
       </div>
-      <div class="car" data-car tabindex="0" aria-roledescription="carousel" aria-label="mGear Car Rig media"><div class="stagewrap"><div class="stage"><div class="track"><div class="cs"><video class="mv" controls playsinline muted loop preload="metadata" poster="media/car-rig-breakdown.jpg" aria-label="mGear Car Rig: Rig breakdown"><source src="media/car-rig-breakdown.mp4" type="video/mp4"></video><span class="ccap">Rig breakdown</span></div><div class="cs"><video class="mv" controls playsinline muted loop preload="metadata" poster="media/car-env-shot.jpg" aria-label="mGear Car Rig: Film shot"><source src="media/car-env-shot.mp4" type="video/mp4"></video><span class="ccap">Film shot</span></div></div></div><button type="button" class="cb prev" aria-label="Previous">&#8249;</button><button type="button" class="cb next" aria-label="Next">&#8250;</button></div><div class="dots" role="group" aria-label="Choose item"><button type="button" aria-label="Show item 1 of 2" class="on">1</button><button type="button" aria-label="Show item 2 of 2">2</button></div></div>
+      <div class="car" data-car tabindex="0" aria-roledescription="carousel" aria-label="mGear Car Rig media"><div class="stagewrap"><div class="stage"><div class="track"><div class="cs"><video class="mv" controls playsinline muted loop preload="metadata" poster="media/car-env-shot.jpg" aria-label="mGear Car Rig: Film shot"><source src="media/car-env-shot.mp4" type="video/mp4"></video><span class="ccap">Film shot</span></div><div class="cs"><video class="mv" controls playsinline muted loop preload="metadata" poster="media/car-rig-breakdown.jpg" aria-label="mGear Car Rig: Rig breakdown"><source src="media/car-rig-breakdown.mp4" type="video/mp4"></video><span class="ccap">Rig breakdown</span></div></div></div><button type="button" class="cb prev" aria-label="Previous">&#8249;</button><button type="button" class="cb next" aria-label="Next">&#8250;</button></div><div class="dots" role="group" aria-label="Choose item"><button type="button" aria-label="Show item 1 of 2" class="on">1</button><button type="button" aria-label="Show item 2 of 2">2</button></div></div>
     </div>
   </section>
   <section class="slide proj" id="p3" data-fx data-tall>
@@ -383,7 +389,7 @@ footer .logo{color:#15151a}
   <section class="slide proj" id="p9" data-fx data-tall>
     <div class="si text tone-light">
       <div class="wrap grid">
-        <div class="l reveal"><span class="tag">Honey Business<i></i>BYU short film</span><h3>Tree Rig</h3></div>
+        <div class="l reveal"><img class="plogo" src="media/logo-honey.png" alt="Honey Business logo" loading="lazy"><span class="tag">Honey Business<i></i>BYU short film</span><h3>Tree Rig</h3></div>
         <div class="r reveal" style="--d:120ms"><p>Tree character rig created for BYU Center for Animation’s short film Honey Business. Rigged in Maya with custom controls for bending and stretching the tree’s branches and limbs. The rig was designed to give the animator flexible controls for creating exaggerated poses and animation.</p><ul class="meta"><li class="role">Rigging Artist</li><li>Maya</li></ul></div>
       </div>
       <div class="car" data-car tabindex="0" aria-roledescription="carousel" aria-label="Tree Rig media"><div class="stagewrap"><div class="stage"><div class="track"><div class="cs"><video class="mv" controls playsinline muted loop preload="metadata" poster="media/bigred.jpg" aria-label="Tree Rig: Tree rig"><source src="media/bigred.mp4" type="video/mp4"></video><span class="ccap">Tree rig</span></div><div class="cs"><video class="mv" controls playsinline muted loop preload="metadata" poster="media/tree-rig-inshot.jpg" aria-label="Tree Rig: Film shot"><source src="media/tree-rig-inshot.mp4" type="video/mp4"></video><span class="ccap">Film shot</span></div></div></div><button type="button" class="cb prev" aria-label="Previous">&#8249;</button><button type="button" class="cb next" aria-label="Next">&#8250;</button></div><div class="dots" role="group" aria-label="Choose item"><button type="button" aria-label="Show item 1 of 2" class="on">1</button><button type="button" aria-label="Show item 2 of 2">2</button></div></div>
@@ -542,6 +548,12 @@ footer .logo{color:#15151a}
     var sx=null;
     c.addEventListener('touchstart',function(e){sx=e.touches[0].clientX},{passive:true});
     c.addEventListener('touchend',function(e){if(sx===null||n<2)return;var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50)go(i+(dx<0?1:-1));sx=null},{passive:true});
+  });
+
+  /* all videos are silent and can't be unmuted */
+  [].forEach.call(doc.querySelectorAll('video'),function(v){
+    v.muted=true;v.defaultMuted=true;v.volume=0;
+    v.addEventListener('volumechange',function(){if(!v.muted||v.volume>0){v.muted=true;v.volume=0}});
   });
 
   /* every video on screen plays; anything off screen pauses */
